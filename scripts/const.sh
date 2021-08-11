@@ -66,6 +66,8 @@ DIR_REMOTE="$BASEDIR_REMOTE/benchmarks"
 DIR_SOURCE="$DIR_CURRENT/code/benchmarks"
 
 # Benchmark versions
-COMMIT="4ef39d30cd70289559d0c49bcf59f6de5e40aa9d"
-HASH="4ef39d3"
+OLD_COMMIT="4ef39d30cd70289559d0c49bcf59f6de5e40aa9d"
+OLD_HASH="4ef39d3"
+NEW_COMMIT="4ef39d30cd70289559d0c49bcf59f6de5e40aa9d"
+NEW_HASH="4ef39d3"
 

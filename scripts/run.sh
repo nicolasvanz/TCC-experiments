@@ -32,8 +32,13 @@ ADDONS_ON="export ADDONS ?= -D__NANVIX_MICROKERNEL_STATIC_SCHED=1"
 # Current version
 if [ "$1" == "--baseline" ] || [ "$2" == "--baseline" ];
 then
+	# Current version
+	COMMIT=$OLD_COMMIT
+	HASH=$OLD_HASH
 	OUTDIR=$DIR_RESULTS_RAW/$HASH-baseline
 else
+	COMMIT=$NEW_COMMIT
+	HASH=$NEW_HASH
 	OUTDIR=$DIR_RESULTS_RAW/$HASH
 fi
 
