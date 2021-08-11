@@ -1,0 +1,3 @@
+[submodule "code/benchmarks"]
+	path = code/benchmarks
+	url = https://github.com/nanvix/benchmarks
