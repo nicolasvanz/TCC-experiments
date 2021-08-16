@@ -93,12 +93,12 @@ function parse_powerlog {
 	do
 		for component in mppa-power; # ddr0-power ddr1-power mppa-temp plx-tmp
 		do
-			powerlogfile=$dir/$hash/profiles/profile-$component-$exp-nanvix-cluster-$it
+			powerlogfile=$dir/$hash/profile-$component-$exp-nanvix-cluster-$it
 
 			if [ ! -e $powerlogfile ];
 			then
 				echo "Missing $it execution of $exp ($version) : $powerlogfile"
-				break
+				continue
 			fi
 
 			cat $powerlogfile                         | \
@@ -118,326 +118,78 @@ function parse_powerlog {
 }
 
 #===============================================================================
-# Thread vs Dispatch
+# Services
 #===============================================================================
 
-hash="08af852"
-mkdir -p $DIR_RESULTS_COOKED/$hash/
+hash0=$NEW_HASH
+hash1="$OLD_HASH-baseline"
+mkdir -p $DIR_RESULTS_COOKED/
 
-csvfile=$DIR_RESULTS_COOKED/$hash/fork-dispatch.csv
-powerfile=$DIR_RESULTS_COOKED/$hash/fork-dispatch-profile.csv
+
+
+echo "[+] Parsing services (task)"
 
 # Write header.
-echo "kernel;core;it;operation;amount;dtlb;itlb;reg;branch;dcache;icache;cycles" > $csvfile
-echo "version;component;it;time;power" > $powerfile
 
-# Populate csv.
-for exp in fork-join dispatch-wait;
+for exp in fork-join;
 do
-	echo "[+] Parsing $exp"
-	parse_runlog $DIR_RESULTS_RAW $hash $exp $csvfile
+	csvfile=$DIR_RESULTS_COOKED/$exp.csv
+	powerfile=$DIR_RESULTS_COOKED/$exp-profile.csv
+
+	echo "version;type;it;operation;amount;dtlb;itlb;reg;branch;dcache;icache;cycles" > $csvfile
+	echo "version;component;it;time;power" > $powerfile
+
+	for h in $hash0 $hash1;
+	do
+		runlogfile=$DIR_RESULTS_RAW/$h/$exp
+		if [ $h == $NEW_HASH ];
+		then
+			version="new"
+		else
+			version="old"
+		fi
+
+		concatenate $runlogfile   | \
+			filter "benchmarks" 6 | \
+			format "\[|\]" " "    | \
+			format "  " " "       | \
+			cut -d " " -f 4-      | \
+			format " "  ";"       | \
+			format "^"  "$version;" \
+		>> $csvfile
+
+		parse_powerlog $DIR_RESULTS_RAW $hash1 $exp $powerfile $version
+	done
 done
 
-parse_powerlog $DIR_RESULTS_RAW $hash fork-join $powerfile baseline
-parse_powerlog $DIR_RESULTS_RAW $hash dispatch-wait $powerfile task
-
-
-#===============================================================================
-# Master core usage
-#===============================================================================
-
-hash0="4ef39d3"
-hash1="$hash0-baseline"
-
-echo "[+] Parsing Core Usage"
-
-mkdir -p $DIR_RESULTS_COOKED/$hash0/
-csvfile=$DIR_RESULTS_COOKED/$hash0/heartbeat-core-usage.csv
-powerfile=$DIR_RESULTS_COOKED/$hash0/heartbeat-core-usage-profile.csv
-
-# Write header.
-echo "version;service;it;mtime;dtime;utime;total;kerror;cerror" > $csvfile
-echo "version;component;it;time;power" > $powerfile
-
-# Task
-for exp in heartbeat-core-usage;
-do
-	runlogfile=$DIR_RESULTS_RAW/$hash0/$exp
-
-	concatenate $runlogfile     | \
-		filter "benchmarks" 6   | \
-		format "\[|\]" " "      | \
-		format "  " " "         | \
-		cut -d " " -f 3-        | \
-		format " " ";"          | \
-		format "-core-usage" "" | \
-		format "^" "task;"        \
-	>> $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash0 $exp $powerfile task
-done
-
-# Baseline
-for exp in heartbeat-core-usage;
-do
-	runlogfile=$DIR_RESULTS_RAW/$hash1/$exp
-
-	concatenate $runlogfile         | \
-		filter "benchmarks" 6       | \
-		format "\[|\]" " "          | \
-		format "  " " "             | \
-		cut -d " " -f 3-            | \
-		format " " ";"              | \
-		format "-core-usage" "" | \
-		format "^" "baseline;"        \
-	>> $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash1 $exp $powerfile baseline
-done
-
-mkdir -p $DIR_RESULTS_COOKED/$hash0/
-csvfile=$DIR_RESULTS_COOKED/$hash0/lookup-core-usage.csv
-powerfile=$DIR_RESULTS_COOKED/$hash0/lookup-core-usage-profile.csv
-
-# Write header.
-echo "version;service;it;mtime;dtime;utime;total;kerror;cerror" > $csvfile
-echo "version;component;it;time;power" > $powerfile
-
-# Task
-for exp in lookup-core-usage;
-do
-	runlogfile=$DIR_RESULTS_RAW/$hash0/$exp
-
-	concatenate $runlogfile     | \
-		filter "benchmarks" 6   | \
-		format "\[|\]" " "      | \
-		format "  " " "         | \
-		cut -d " " -f 3-        | \
-		format " " ";"          | \
-		format "-core-usage" "" | \
-		format "^" "task;"        \
-	>> $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash0 $exp $powerfile task
-done
-
-# Baseline
-for exp in lookup-core-usage;
-do
-	runlogfile=$DIR_RESULTS_RAW/$hash1/$exp
-
-	concatenate $runlogfile         | \
-		filter "benchmarks" 6       | \
-		format "\[|\]" " "          | \
-		format "  " " "             | \
-		cut -d " " -f 3-            | \
-		format " " ";"              | \
-		format "-core-usage" "" | \
-		format "^" "baseline;"        \
-	>> $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash1 $exp $powerfile baseline
-done
-
-#===============================================================================
-# Syscalls
-#===============================================================================
-
-hash="4ef39d3"
-mkdir -p $DIR_RESULTS_COOKED/$hash/
-
-csvfile=$DIR_RESULTS_COOKED/$hash/syscalls.csv
-powerfile=$DIR_RESULTS_COOKED/$hash/syscalls-profile.csv
-
-echo "type;it;noperations;nusers;ntaskers;cycles" > $csvfile
-echo "version;component;it;time;power" > $powerfile
-
-for exp in syscall;
-do
-	echo "[+] Parsing $exp"
-
-	parse_runlog $DIR_RESULTS_RAW $hash $exp $csvfile
-	$SED -i -e "s/-syscall//g" $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash $exp $powerfile baseline
-	parse_powerlog $DIR_RESULTS_RAW $hash $exp $powerfile task
-done
-
-: << END
-
-#===============================================================================
-# Noise
-#===============================================================================
-
-hash="173c9d4"
-mkdir -p $DIR_RESULTS_COOKED/$hash/
-
-csvfile=$DIR_RESULTS_COOKED/$hash/noise.csv
-
-# Write header.
-echo "name;type;it;nworkers;nkcalls;nios;noperations;cycles;icache;dcache;branch;reg;itlb;dtlb" > $csvfile
 
 for exp in noise;
 do
-	echo "[+] Parsing $exp"
-	parse_runlog $DIR_RESULTS_RAW $hash $exp $csvfile
+	csvfile=$DIR_RESULTS_COOKED/$exp.csv
+	powerfile=$DIR_RESULTS_COOKED/$exp-profile.csv
+
+	echo "version;it;noise;nworkers;nidle;cycles;icache;dcache;branch;reg;itlb;dtlb" > $csvfile
+	echo "version;component;it;time;power" > $powerfile
+
+	for h in $hash0 $hash1;
+	do
+		runlogfile=$DIR_RESULTS_RAW/$h/$exp
+		if [ $h == $NEW_HASH ];
+		then
+			version="new"
+		else
+			version="old"
+		fi
+
+		concatenate $runlogfile   | \
+			filter "benchmarks" 6 | \
+			format "\[|\]" " "    | \
+			format "  " " "       | \
+			cut -d " " -f 4-      | \
+			format " "  ";"       | \
+			format "^"  "$version;" \
+		>> $csvfile
+
+		parse_powerlog $DIR_RESULTS_RAW $hash1 $exp $powerfile $version
+	done
 done
-
-#===============================================================================
-# Services
-#===============================================================================
-
-hash0="8a71137"
-hash1="8a71137-baseline"
-mkdir -p $DIR_RESULTS_COOKED/$hash0/
-
-csvfile=$DIR_RESULTS_COOKED/$hash0/services.csv
-powerfile=$DIR_RESULTS_COOKED/$hash0/services-profile.csv
-
-echo "[+] Parsing services (task)"
-
-# Write header.
-echo "version;service;cycles" > $csvfile
-echo "version;component;it;time;power" > $powerfile
-
-for exp in heartbeat lookup;
-do
-	runlogfile=$DIR_RESULTS_RAW/$hash0/$exp
-
-	concatenate $runlogfile   | \
-		filter "benchmarks" 6 | \
-		format "\[|\]" " "    | \
-		format "  " " "       | \
-		cut -d " " -f 3-      | \
-		format " "  ";"       | \
-		format "^" "task;"      \
-	>> $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash0 $exp $powerfile task
-done
-
-runlogfile=$DIR_RESULTS_RAW/$hash0/pgfetch
-concatenate $runlogfile       | \
-	filter "benchmarks" 6     | \
-	format "\[|\]" " "        | \
-	format "  " " "           | \
-	cut -d " " -f 3 -f 6      | \
-	format "pfetch" "pgfetch" | \
-	format " "  ";"           | \
-	format "^" "task;"          \
->> $csvfile
-
-parse_powerlog $DIR_RESULTS_RAW $hash0 pgfetch $powerfile task
-
-runlogfile=$DIR_RESULTS_RAW/$hash0/pginval
-concatenate $runlogfile       | \
-	filter "benchmarks" 6     | \
-	format "\[|\]" " "        | \
-	format "  " " "           | \
-	cut -d " " -f 3-4         | \
-	format " "  ";"           | \
-	format "^" "task;"          \
->> $csvfile
-
-parse_powerlog $DIR_RESULTS_RAW $hash0 pginval $powerfile task
-
-echo "[+] Parsing services (baseline)"
-
-for exp in heartbeat lookup;
-do
-	runlogfile=$DIR_RESULTS_RAW/$hash1/$exp
-
-	concatenate $runlogfile    | \
-		filter "benchmarks" 6  | \
-		format "\[|\]" " "     | \
-		format "  " " "        | \
-		cut -d " " -f 3-       | \
-		format " "  ";"        | \
-		format "^" "baseline;"   \
-	>> $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash1 $exp $powerfile baseline
-done
-
-runlogfile=$DIR_RESULTS_RAW/$hash1/pgfetch
-concatenate $runlogfile       | \
-	filter "benchmarks" 6     | \
-	format "\[|\]" " "        | \
-	format "  " " "           | \
-	cut -d " " -f 3 -f 6      | \
-	format "pfetch" "pgfetch" | \
-	format " "  ";"           | \
-	format "^" "baseline;"      \
->> $csvfile
-
-parse_powerlog $DIR_RESULTS_RAW $hash1 pgfetch $powerfile baseline
-
-runlogfile=$DIR_RESULTS_RAW/$hash1/pginval
-concatenate $runlogfile       | \
-	filter "benchmarks" 6     | \
-	format "\[|\]" " "        | \
-	format "  " " "           | \
-	cut -d " " -f 3-4         | \
-	format " "  ";"           | \
-	format "^" "baseline;"      \
->> $csvfile
-
-parse_powerlog $DIR_RESULTS_RAW $hash1 pginval $powerfile baseline
-
-#===============================================================================
-
-END
-
-#===============================================================================
-# Services
-#===============================================================================
-
-hash0="4ef39d3"
-hash1="$hash0-baseline"
-mkdir -p $DIR_RESULTS_COOKED/$hash0/
-
-csvfile=$DIR_RESULTS_COOKED/$hash0/services.csv
-powerfile=$DIR_RESULTS_COOKED/$hash0/services-profile.csv
-
-echo "[+] Parsing services (task)"
-
-# Write header.
-echo "version;cycles" > $csvfile
-echo "version;component;it;time;power" > $powerfile
-
-for exp in services-dispatcher;
-do
-	runlogfile=$DIR_RESULTS_RAW/$hash0/$exp
-
-	concatenate $runlogfile   | \
-		filter "benchmarks" 6 | \
-		format "\[|\]" " "    | \
-		format "  " " "       | \
-		cut -d " " -f 4-      | \
-		format " "  ";"         \
-	>> $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash0 $exp $powerfile $exp
-done
-
-for exp in services-thread services-user;
-do
-	runlogfile=$DIR_RESULTS_RAW/$hash1/$exp
-
-	concatenate $runlogfile   | \
-		filter "benchmarks" 6 | \
-		format "\[|\]" " "    | \
-		format "  " " "       | \
-		cut -d " " -f 4-      | \
-		format " "  ";"         \
-	>> $csvfile
-
-	parse_powerlog $DIR_RESULTS_RAW $hash1 $exp $powerfile $exp
-
-done
-
-$SED -i -e "s/services-//g" $csvfile
-$SED -i -e "s/services-//g" $powerfile
-
-#===============================================================================
-

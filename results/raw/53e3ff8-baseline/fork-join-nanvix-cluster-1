@@ -1,0 +1,1463 @@
+IODDR0@0.0: RM 0: [hal] booting up cluster...
+IODDR0@0.0: RM 0: [hal][cluster] initializing memory layout...
+IODDR0@0.0: RM 0: [hal][cluster] text = 304 KB data = 17 KB bss = 437 KB
+IODDR0@0.0: RM 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00010000
+IODDR0@0.0: RM 0: [hal][cluster] hyper_high_base=0x001f0000 hyper_high_end=0x00200000
+IODDR0@0.0: RM 0: [hal][cluster] kernel_base=0x00010000 kernel_end=0x00120000
+IODDR0@0.0: RM 0: [hal][cluster] kpool_base=0x00120000 kpool_end=0x00130000
+IODDR0@0.0: RM 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+IODDR0@0.0: RM 0: [hal][cluster] memsize=1024 MB kmem=1088 KB kpool=64 KB umem=524288 KB
+IODDR0@0.0: RM 0: [core 0][hal] initializing tlb
+IODDR0@0.0: RM 0: [hal][core] booting up core...
+IODDR0@0.0: RM 0: [hal] exception stack at 0x00090000
+IODDR0@0.0: RM 0: [hal][core] initializing interrupts...
+IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 7
+IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 3
+IODDR0@0.0: RM 1: [core 1][hal] initializing tlb
+IODDR0@0.0: RM 2: [core 2][hal] initializing tlb
+IODDR0@0.0: RM 3: [core 3][hal] initializing tlb
+IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 4
+IODDR0@0.0: RM 1: [hal][core] booting up core...
+IODDR0@0.0: RM 2: [hal][core] booting up core...
+IODDR0@0.0: RM 3: [hal][core] booting up core...
+IODDR0@0.0: RM 0: [hal][sync] Sync Initialization.
+IODDR0@0.0: RM 1: [hal] exception stack at 0x00091000
+IODDR0@0.0: RM 2: [hal] exception stack at 0x00092000
+IODDR0@0.0: RM 3: [hal] exception stack at 0x00093000
+IODDR0@0.0: RM 0: [hal][mailbox] Mailbox Initialization.
+IODDR0@0.0: RM 0: [hal][portal] Portal Initialization.
+IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 0
+IODDR0@0.0: RM 0: [kernel][mm] initializing the memory system
+IODDR0@0.0: RM 0: [kernel][mm] initializing the page frame allocator
+IODDR0@0.0: RM 0: [kernel][mm] initializing the kernel page allocator
+IODDR0@0.0: RM 0: [kernel][mm] initializing the user page allocator
+IODDR0@0.0: RM 0: [hal][core] exception handler 0x0003e9e0 registered for tlb fault
+IODDR0@0.0: RM 0: [hal][core] overwriting handler 0x0003e9e0 for tlb fault
+IODDR0@0.0: RM 0: [hal][core] exception handler 0x0003e9e0 registered for tlb fault
+IODDR0@0.0: RM 0: [hal][core] exception handler 0x0003eb18 registered for page fault
+IODDR0@0.0: RM 0: [kernel][noc] initializing the noc system
+IODDR0@0.0: RM 0: [kernel][noc] initializing the kmailbox facility
+IODDR0@0.0: RM 0: [kernel][noc] initializing the kportal facility
+IODDR0@0.0: RM 0: [kernel][noc] initializing the ksync facility
+IODDR0@0.0: RM 0: [kernel][dev] enabling hardware interrupts
+IODDR0@0.0: RM 0: [kernel][dispatcher] Working on core 0!
+IODDR0@0.0: RM 1: [user][noc] initializing the noc system
+IODDR0@0.0: RM 1: [user][portal] Initializes portal module
+IODDR0@0.0: RM 1: [user][sync] Initializes sync module
+IODDR0@0.0: RM 1: [user][mailbox] Initializes mailbox module
+IODDR0@0.0: RM 0: cluster 0: ------------------------------------------------------------------------
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 f 1 2587 888406 390 164 22533 10343 5993
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 f 1 333 196 60687 15676 5866 2448 251552
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 j 1 255 107 15037 7183 5326 2142 442845
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 j 1 138 80 7465 3212 1043 960 62186
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 f 2 2730 1270733 447 192 28408 11816 9293
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 f 2 528 312 114220 28246 10872 3957 440861
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 j 2 396 171 25017 11371 10441 3419 632110
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 j 2 138 80 7684 3220 1254 964 63022
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 f 3 859934 222 84 10808 5645 1555 1384
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 f 3 753 464 171116 42260 17537 6229 659797
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 j 3 378 147 25903 9529 11428 1909 855717
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 j 3 138 80 7966 3212 1748 960 63768
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 f 4 3006 2035574 561 248 40453 14937 16131
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 f 4 918 544 220620 53311 20208 6990 818796
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 j 4 678 299 44695 19769 20823 5989 1010770
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 j 4 138 80 8142 3260 1694 966 65030
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 f 5 3039 2417148 618 276 47602 16659 21303
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 f 5 1113 660 275905 65833 26514 8578 1008528
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][u] 0 j 5 819 363 55005 24003 26265 7287 1200265
+IODDR0@0.0: RM 0: cluster 0: [benchmarks][fork-join][k] 0 j 5 138 80 7930 3285 1874 958 65460
+IODDR0@0.0: RM 0: cluster 0: ------------------------------------------------------------------------
+IODDR0@0.0: RM 0: [hal][processor] powering off...
+IODDR0@0.0: RM 0: [hal] powering off...
+IODDR1@0.0: RM 0: [hal] booting up cluster...
+IODDR1@0.0: RM 0: [hal][cluster] initializing memory layout...
+IODDR1@0.0: RM 0: [hal][cluster] text = 304 KB data = 17 KB bss = 437 KB
+IODDR1@0.0: RM 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00010000
+IODDR1@0.0: RM 0: [hal][cluster] hyper_high_base=0x001f0000 hyper_high_end=0x00200000
+IODDR1@0.0: RM 0: [hal][cluster] kernel_base=0x00010000 kernel_end=0x00120000
+IODDR1@0.0: RM 0: [hal][cluster] kpool_base=0x00120000 kpool_end=0x00130000
+IODDR1@0.0: RM 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+IODDR1@0.0: RM 0: [hal][cluster] memsize=1024 MB kmem=1088 KB kpool=64 KB umem=524288 KB
+IODDR1@0.0: RM 0: [core 0][hal] initializing tlb
+IODDR1@0.0: RM 0: [hal][core] booting up core...
+IODDR1@0.0: RM 0: [hal] exception stack at 0x00090000
+IODDR1@0.0: RM 0: [hal][core] initializing interrupts...
+IODDR1@0.0: RM 0: [hal][core] interrupt handler registered for irq 7
+IODDR1@0.0: RM 0: [hal][core] interrupt handler registered for irq 3
+IODDR1@0.0: RM 1: [core 1][hal] initializing tlb
+IODDR1@0.0: RM 2: [core 2][hal] initializing tlb
+IODDR1@0.0: RM 3: [core 3][hal] initializing tlb
+IODDR1@0.0: RM 0: [hal][core] interrupt handler registered for irq 4
+IODDR1@0.0: RM 1: [hal][core] booting up core...
+IODDR1@0.0: RM 2: [hal][core] booting up core...
+IODDR1@0.0: RM 3: [hal][core] booting up core...
+IODDR1@0.0: RM 0: [hal][sync] Sync Initialization.
+IODDR1@0.0: RM 1: [hal] exception stack at 0x00091000
+IODDR1@0.0: RM 2: [hal] exception stack at 0x00092000
+IODDR1@0.0: RM 3: [hal] exception stack at 0x00093000
+IODDR1@0.0: RM 0: [hal][mailbox] Mailbox Initialization.
+IODDR1@0.0: RM 0: [hal][portal] Portal Initialization.
+IODDR1@0.0: RM 0: [hal][core] interrupt handler registered for irq 0
+IODDR1@0.0: RM 0: [kernel][mm] initializing the memory system
+IODDR1@0.0: RM 0: [kernel][mm] initializing the page frame allocator
+IODDR1@0.0: RM 0: [kernel][mm] initializing the kernel page allocator
+IODDR1@0.0: RM 0: [kernel][mm] initializing the user page allocator
+IODDR1@0.0: RM 0: [hal][core] exception handler 0x0003e9e0 registered for tlb fault
+IODDR1@0.0: RM 0: [hal][core] overwriting handler 0x0003e9e0 for tlb fault
+IODDR1@0.0: RM 0: [hal][core] exception handler 0x0003e9e0 registered for tlb fault
+IODDR1@0.0: RM 0: [hal][core] exception handler 0x0003eb18 registered for page fault
+IODDR1@0.0: RM 0: [kernel][noc] initializing the noc system
+IODDR1@0.0: RM 0: [kernel][noc] initializing the kmailbox facility
+IODDR1@0.0: RM 0: [kernel][noc] initializing the kportal facility
+IODDR1@0.0: RM 0: [kernel][noc] initializing the ksync facility
+IODDR1@0.0: RM 0: [kernel][dev] enabling hardware interrupts
+IODDR1@0.0: RM 1: [user][noc] initializing the noc system
+IODDR1@0.0: RM 0: [kernel][dispatcher] Working on core 0!
+IODDR1@0.0: RM 1: [user][portal] Initializes portal module
+IODDR1@0.0: RM 1: [user][sync] Initializes sync module
+IODDR1@0.0: RM 1: [user][mailbox] Initializes mailbox module
+IODDR1@0.0: RM 0: [hal][core] halting...
+Cluster8@0.0: PE 0: [hal] booting up cluster...
+Cluster8@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster8@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster8@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster8@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster8@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster8@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster8@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster8@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster8@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster8@0.0: PE 0: [hal][core] booting up core...
+Cluster8@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster8@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster8@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster8@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster8@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster8@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster8@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster8@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster8@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster8@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster8@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster8@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster8@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster8@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster8@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster8@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster8@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster8@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster8@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster8@0.0: PE 1: [hal][core] booting up core...
+Cluster8@0.0: PE 2: [hal][core] booting up core...
+Cluster8@0.0: PE 3: [hal][core] booting up core...
+Cluster8@0.0: PE 4: [hal][core] booting up core...
+Cluster8@0.0: PE 5: [hal][core] booting up core...
+Cluster8@0.0: PE 6: [hal][core] booting up core...
+Cluster8@0.0: PE 7: [hal][core] booting up core...
+Cluster8@0.0: PE 8: [hal][core] booting up core...
+Cluster8@0.0: PE 9: [hal][core] booting up core...
+Cluster8@0.0: PE 10: [hal][core] booting up core...
+Cluster8@0.0: PE 11: [hal][core] booting up core...
+Cluster8@0.0: PE 12: [hal][core] booting up core...
+Cluster8@0.0: PE 13: [hal][core] booting up core...
+Cluster8@0.0: PE 14: [hal][core] booting up core...
+Cluster8@0.0: PE 15: [hal][core] booting up core...
+Cluster8@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster8@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster8@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster8@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster8@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster8@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster8@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster8@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster8@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster8@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster8@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster8@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster8@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster8@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster8@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster8@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster8@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster8@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster8@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster8@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster8@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster8@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster8@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster8@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster8@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster8@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster8@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster8@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster8@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster8@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster8@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster8@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster8@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster8@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster8@0.0: PE 1: [user][noc] initializing the noc system
+Cluster8@0.0: PE 1: [user][portal] Initializes portal module
+Cluster8@0.0: PE 1: [user][sync] Initializes sync module
+Cluster8@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster8@0.0: PE 0: [hal][core] halting...
+Cluster9@0.0: PE 0: [hal] booting up cluster...
+Cluster9@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster9@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster9@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster9@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster9@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster9@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster9@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster9@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster9@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster9@0.0: PE 0: [hal][core] booting up core...
+Cluster9@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster9@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster9@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster9@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster9@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster9@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster9@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster9@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster9@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster9@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster9@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster9@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster9@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster9@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster9@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster9@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster9@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster9@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster9@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster9@0.0: PE 1: [hal][core] booting up core...
+Cluster9@0.0: PE 2: [hal][core] booting up core...
+Cluster9@0.0: PE 3: [hal][core] booting up core...
+Cluster9@0.0: PE 4: [hal][core] booting up core...
+Cluster9@0.0: PE 5: [hal][core] booting up core...
+Cluster9@0.0: PE 6: [hal][core] booting up core...
+Cluster9@0.0: PE 7: [hal][core] booting up core...
+Cluster9@0.0: PE 8: [hal][core] booting up core...
+Cluster9@0.0: PE 9: [hal][core] booting up core...
+Cluster9@0.0: PE 10: [hal][core] booting up core...
+Cluster9@0.0: PE 11: [hal][core] booting up core...
+Cluster9@0.0: PE 12: [hal][core] booting up core...
+Cluster9@0.0: PE 13: [hal][core] booting up core...
+Cluster9@0.0: PE 14: [hal][core] booting up core...
+Cluster9@0.0: PE 15: [hal][core] booting up core...
+Cluster9@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster9@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster9@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster9@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster9@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster9@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster9@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster9@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster9@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster9@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster9@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster9@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster9@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster9@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster9@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster9@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster9@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster9@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster9@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster9@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster9@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster9@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster9@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster9@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster9@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster9@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster9@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster9@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster9@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster9@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster9@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster9@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster9@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster9@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster9@0.0: PE 1: [user][noc] initializing the noc system
+Cluster9@0.0: PE 1: [user][portal] Initializes portal module
+Cluster9@0.0: PE 1: [user][sync] Initializes sync module
+Cluster9@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster9@0.0: PE 0: [hal][core] halting...
+Cluster10@0.0: PE 0: [hal] booting up cluster...
+Cluster10@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster10@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster10@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster10@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster10@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster10@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster10@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster10@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster10@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster10@0.0: PE 0: [hal][core] booting up core...
+Cluster10@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster10@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster10@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster10@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster10@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster10@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster10@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster10@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster10@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster10@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster10@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster10@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster10@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster10@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster10@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster10@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster10@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster10@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster10@0.0: PE 1: [hal][core] booting up core...
+Cluster10@0.0: PE 2: [hal][core] booting up core...
+Cluster10@0.0: PE 3: [hal][core] booting up core...
+Cluster10@0.0: PE 4: [hal][core] booting up core...
+Cluster10@0.0: PE 5: [hal][core] booting up core...
+Cluster10@0.0: PE 6: [hal][core] booting up core...
+Cluster10@0.0: PE 7: [hal][core] booting up core...
+Cluster10@0.0: PE 8: [hal][core] booting up core...
+Cluster10@0.0: PE 9: [hal][core] booting up core...
+Cluster10@0.0: PE 10: [hal][core] booting up core...
+Cluster10@0.0: PE 11: [hal][core] booting up core...
+Cluster10@0.0: PE 12: [hal][core] booting up core...
+Cluster10@0.0: PE 13: [hal][core] booting up core...
+Cluster10@0.0: PE 14: [hal][core] booting up core...
+Cluster10@0.0: PE 15: [hal][core] booting up core...
+Cluster10@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster10@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster10@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster10@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster10@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster10@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster10@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster10@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster10@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster10@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster10@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster10@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster10@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster10@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster10@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster10@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster10@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster10@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster10@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster10@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster10@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster10@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster10@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster10@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster10@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster10@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster10@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster10@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster10@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster10@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster10@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster10@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster10@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster10@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster10@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster10@0.0: PE 1: [user][noc] initializing the noc system
+Cluster10@0.0: PE 1: [user][portal] Initializes portal module
+Cluster10@0.0: PE 1: [user][sync] Initializes sync module
+Cluster10@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster10@0.0: PE 0: [hal][core] halting...
+Cluster11@0.0: PE 0: [hal] booting up cluster...
+Cluster11@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster11@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster11@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster11@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster11@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster11@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster11@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster11@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster11@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster11@0.0: PE 0: [hal][core] booting up core...
+Cluster11@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster11@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster11@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster11@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster11@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster11@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster11@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster11@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster11@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster11@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster11@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster11@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster11@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster11@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster11@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster11@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster11@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster11@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster11@0.0: PE 1: [hal][core] booting up core...
+Cluster11@0.0: PE 2: [hal][core] booting up core...
+Cluster11@0.0: PE 3: [hal][core] booting up core...
+Cluster11@0.0: PE 4: [hal][core] booting up core...
+Cluster11@0.0: PE 5: [hal][core] booting up core...
+Cluster11@0.0: PE 6: [hal][core] booting up core...
+Cluster11@0.0: PE 7: [hal][core] booting up core...
+Cluster11@0.0: PE 8: [hal][core] booting up core...
+Cluster11@0.0: PE 9: [hal][core] booting up core...
+Cluster11@0.0: PE 10: [hal][core] booting up core...
+Cluster11@0.0: PE 11: [hal][core] booting up core...
+Cluster11@0.0: PE 12: [hal][core] booting up core...
+Cluster11@0.0: PE 13: [hal][core] booting up core...
+Cluster11@0.0: PE 14: [hal][core] booting up core...
+Cluster11@0.0: PE 15: [hal][core] booting up core...
+Cluster11@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster11@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster11@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster11@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster11@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster11@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster11@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster11@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster11@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster11@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster11@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster11@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster11@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster11@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster11@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster11@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster11@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster11@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster11@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster11@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster11@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster11@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster11@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster11@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster11@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster11@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster11@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster11@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster11@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster11@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster11@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster11@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster11@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster11@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster11@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster11@0.0: PE 1: [user][noc] initializing the noc system
+Cluster11@0.0: PE 1: [user][portal] Initializes portal module
+Cluster11@0.0: PE 1: [user][sync] Initializes sync module
+Cluster11@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster11@0.0: PE 0: [hal][core] halting...
+Cluster12@0.0: PE 0: [hal] booting up cluster...
+Cluster12@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster12@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster12@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster12@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster12@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster12@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster12@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster12@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster12@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster12@0.0: PE 0: [hal][core] booting up core...
+Cluster12@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster12@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster12@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster12@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster12@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster12@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster12@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster12@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster12@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster12@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster12@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster12@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster12@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster12@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster12@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster12@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster12@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster12@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster12@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster12@0.0: PE 1: [hal][core] booting up core...
+Cluster12@0.0: PE 2: [hal][core] booting up core...
+Cluster12@0.0: PE 3: [hal][core] booting up core...
+Cluster12@0.0: PE 4: [hal][core] booting up core...
+Cluster12@0.0: PE 5: [hal][core] booting up core...
+Cluster12@0.0: PE 6: [hal][core] booting up core...
+Cluster12@0.0: PE 7: [hal][core] booting up core...
+Cluster12@0.0: PE 8: [hal][core] booting up core...
+Cluster12@0.0: PE 9: [hal][core] booting up core...
+Cluster12@0.0: PE 10: [hal][core] booting up core...
+Cluster12@0.0: PE 11: [hal][core] booting up core...
+Cluster12@0.0: PE 12: [hal][core] booting up core...
+Cluster12@0.0: PE 13: [hal][core] booting up core...
+Cluster12@0.0: PE 14: [hal][core] booting up core...
+Cluster12@0.0: PE 15: [hal][core] booting up core...
+Cluster12@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster12@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster12@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster12@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster12@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster12@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster12@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster12@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster12@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster12@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster12@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster12@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster12@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster12@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster12@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster12@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster12@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster12@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster12@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster12@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster12@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster12@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster12@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster12@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster12@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster12@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster12@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster12@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster12@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster12@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster12@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster12@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster12@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster12@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster12@0.0: PE 1: [user][noc] initializing the noc system
+Cluster12@0.0: PE 1: [user][portal] Initializes portal module
+Cluster12@0.0: PE 1: [user][sync] Initializes sync module
+Cluster12@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster12@0.0: PE 0: [hal][core] halting...
+Cluster13@0.0: PE 0: [hal] booting up cluster...
+Cluster13@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster13@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster13@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster13@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster13@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster13@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster13@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster13@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster13@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster13@0.0: PE 0: [hal][core] booting up core...
+Cluster13@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster13@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster13@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster13@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster13@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster13@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster13@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster13@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster13@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster13@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster13@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster13@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster13@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster13@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster13@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster13@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster13@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster13@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster13@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster13@0.0: PE 1: [hal][core] booting up core...
+Cluster13@0.0: PE 2: [hal][core] booting up core...
+Cluster13@0.0: PE 3: [hal][core] booting up core...
+Cluster13@0.0: PE 4: [hal][core] booting up core...
+Cluster13@0.0: PE 5: [hal][core] booting up core...
+Cluster13@0.0: PE 6: [hal][core] booting up core...
+Cluster13@0.0: PE 7: [hal][core] booting up core...
+Cluster13@0.0: PE 8: [hal][core] booting up core...
+Cluster13@0.0: PE 9: [hal][core] booting up core...
+Cluster13@0.0: PE 10: [hal][core] booting up core...
+Cluster13@0.0: PE 11: [hal][core] booting up core...
+Cluster13@0.0: PE 12: [hal][core] booting up core...
+Cluster13@0.0: PE 13: [hal][core] booting up core...
+Cluster13@0.0: PE 14: [hal][core] booting up core...
+Cluster13@0.0: PE 15: [hal][core] booting up core...
+Cluster13@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster13@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster13@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster13@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster13@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster13@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster13@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster13@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster13@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster13@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster13@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster13@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster13@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster13@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster13@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster13@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster13@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster13@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster13@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster13@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster13@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster13@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster13@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster13@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster13@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster13@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster13@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster13@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster13@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster13@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster13@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster13@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster13@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster13@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster13@0.0: PE 1: [user][noc] initializing the noc system
+Cluster13@0.0: PE 1: [user][portal] Initializes portal module
+Cluster13@0.0: PE 1: [user][sync] Initializes sync module
+Cluster13@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster13@0.0: PE 0: [hal][core] halting...
+Cluster14@0.0: PE 0: [hal] booting up cluster...
+Cluster14@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster14@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster14@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster14@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster14@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster14@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster14@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster14@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster14@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster14@0.0: PE 0: [hal][core] booting up core...
+Cluster14@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster14@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster14@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster14@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster14@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster14@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster14@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster14@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster14@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster14@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster14@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster14@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster14@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster14@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster14@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster14@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster14@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster14@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster14@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster14@0.0: PE 1: [hal][core] booting up core...
+Cluster14@0.0: PE 2: [hal][core] booting up core...
+Cluster14@0.0: PE 3: [hal][core] booting up core...
+Cluster14@0.0: PE 4: [hal][core] booting up core...
+Cluster14@0.0: PE 5: [hal][core] booting up core...
+Cluster14@0.0: PE 6: [hal][core] booting up core...
+Cluster14@0.0: PE 7: [hal][core] booting up core...
+Cluster14@0.0: PE 8: [hal][core] booting up core...
+Cluster14@0.0: PE 9: [hal][core] booting up core...
+Cluster14@0.0: PE 10: [hal][core] booting up core...
+Cluster14@0.0: PE 11: [hal][core] booting up core...
+Cluster14@0.0: PE 12: [hal][core] booting up core...
+Cluster14@0.0: PE 13: [hal][core] booting up core...
+Cluster14@0.0: PE 14: [hal][core] booting up core...
+Cluster14@0.0: PE 15: [hal][core] booting up core...
+Cluster14@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster14@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster14@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster14@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster14@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster14@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster14@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster14@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster14@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster14@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster14@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster14@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster14@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster14@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster14@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster14@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster14@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster14@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster14@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster14@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster14@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster14@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster14@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster14@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster14@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster14@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster14@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster14@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster14@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster14@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster14@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster14@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster14@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster14@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster14@0.0: PE 1: [user][noc] initializing the noc system
+Cluster14@0.0: PE 1: [user][portal] Initializes portal module
+Cluster14@0.0: PE 1: [user][sync] Initializes sync module
+Cluster14@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster14@0.0: PE 0: [hal][core] halting...
+Cluster15@0.0: PE 0: [hal] booting up cluster...
+Cluster15@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster15@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster15@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster15@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster15@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster15@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster15@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster15@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster15@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster15@0.0: PE 0: [hal][core] booting up core...
+Cluster15@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster15@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster15@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster15@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster15@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster15@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster15@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster15@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster15@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster15@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster15@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster15@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster15@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster15@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster15@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster15@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster15@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster15@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster15@0.0: PE 1: [hal][core] booting up core...
+Cluster15@0.0: PE 2: [hal][core] booting up core...
+Cluster15@0.0: PE 3: [hal][core] booting up core...
+Cluster15@0.0: PE 4: [hal][core] booting up core...
+Cluster15@0.0: PE 5: [hal][core] booting up core...
+Cluster15@0.0: PE 6: [hal][core] booting up core...
+Cluster15@0.0: PE 7: [hal][core] booting up core...
+Cluster15@0.0: PE 8: [hal][core] booting up core...
+Cluster15@0.0: PE 9: [hal][core] booting up core...
+Cluster15@0.0: PE 10: [hal][core] booting up core...
+Cluster15@0.0: PE 11: [hal][core] booting up core...
+Cluster15@0.0: PE 12: [hal][core] booting up core...
+Cluster15@0.0: PE 13: [hal][core] booting up core...
+Cluster15@0.0: PE 14: [hal][core] booting up core...
+Cluster15@0.0: PE 15: [hal][core] booting up core...
+Cluster15@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster15@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster15@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster15@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster15@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster15@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster15@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster15@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster15@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster15@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster15@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster15@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster15@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster15@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster15@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster15@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster15@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster15@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster15@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster15@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster15@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster15@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster15@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster15@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster15@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster15@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster15@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster15@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster15@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster15@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster15@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster15@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster15@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster15@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster15@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster15@0.0: PE 1: [user][noc] initializing the noc system
+Cluster15@0.0: PE 1: [user][portal] Initializes portal module
+Cluster15@0.0: PE 1: [user][sync] Initializes sync module
+Cluster15@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster15@0.0: PE 0: [hal][core] halting...
+Cluster0@0.0: PE 0: [hal] booting up cluster...
+Cluster0@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster0@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster0@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster0@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster0@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster0@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster0@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster0@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster0@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster0@0.0: PE 0: [hal][core] booting up core...
+Cluster0@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster0@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster0@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster0@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster0@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster0@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster0@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster0@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster0@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster0@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster0@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster0@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster0@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster0@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster0@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster0@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster0@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster0@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster0@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster0@0.0: PE 1: [hal][core] booting up core...
+Cluster0@0.0: PE 2: [hal][core] booting up core...
+Cluster0@0.0: PE 3: [hal][core] booting up core...
+Cluster0@0.0: PE 4: [hal][core] booting up core...
+Cluster0@0.0: PE 5: [hal][core] booting up core...
+Cluster0@0.0: PE 6: [hal][core] booting up core...
+Cluster0@0.0: PE 7: [hal][core] booting up core...
+Cluster0@0.0: PE 8: [hal][core] booting up core...
+Cluster0@0.0: PE 9: [hal][core] booting up core...
+Cluster0@0.0: PE 10: [hal][core] booting up core...
+Cluster0@0.0: PE 11: [hal][core] booting up core...
+Cluster0@0.0: PE 12: [hal][core] booting up core...
+Cluster0@0.0: PE 13: [hal][core] booting up core...
+Cluster0@0.0: PE 14: [hal][core] booting up core...
+Cluster0@0.0: PE 15: [hal][core] booting up core...
+Cluster0@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster0@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster0@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster0@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster0@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster0@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster0@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster0@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster0@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster0@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster0@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster0@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster0@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster0@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster0@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster0@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster0@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster0@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster0@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster0@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster0@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster0@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster0@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster0@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster0@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster0@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster0@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster0@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster0@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster0@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster0@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster0@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster0@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster0@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster0@0.0: PE 1: [user][noc] initializing the noc system
+Cluster0@0.0: PE 1: [user][portal] Initializes portal module
+Cluster0@0.0: PE 1: [user][sync] Initializes sync module
+Cluster0@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster0@0.0: PE 0: [hal][core] halting...
+Cluster1@0.0: PE 0: [hal] booting up cluster...
+Cluster1@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster1@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster1@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster1@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster1@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster1@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster1@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster1@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster1@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster1@0.0: PE 0: [hal][core] booting up core...
+Cluster1@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster1@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster1@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster1@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster1@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster1@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster1@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster1@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster1@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster1@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster1@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster1@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster1@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster1@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster1@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster1@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster1@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster1@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster1@0.0: PE 1: [hal][core] booting up core...
+Cluster1@0.0: PE 2: [hal][core] booting up core...
+Cluster1@0.0: PE 3: [hal][core] booting up core...
+Cluster1@0.0: PE 4: [hal][core] booting up core...
+Cluster1@0.0: PE 5: [hal][core] booting up core...
+Cluster1@0.0: PE 6: [hal][core] booting up core...
+Cluster1@0.0: PE 7: [hal][core] booting up core...
+Cluster1@0.0: PE 8: [hal][core] booting up core...
+Cluster1@0.0: PE 9: [hal][core] booting up core...
+Cluster1@0.0: PE 10: [hal][core] booting up core...
+Cluster1@0.0: PE 11: [hal][core] booting up core...
+Cluster1@0.0: PE 12: [hal][core] booting up core...
+Cluster1@0.0: PE 13: [hal][core] booting up core...
+Cluster1@0.0: PE 14: [hal][core] booting up core...
+Cluster1@0.0: PE 15: [hal][core] booting up core...
+Cluster1@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster1@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster1@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster1@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster1@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster1@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster1@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster1@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster1@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster1@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster1@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster1@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster1@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster1@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster1@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster1@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster1@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster1@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster1@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster1@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster1@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster1@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster1@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster1@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster1@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster1@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster1@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster1@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster1@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster1@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster1@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster1@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster1@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster1@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster1@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster1@0.0: PE 1: [user][noc] initializing the noc system
+Cluster1@0.0: PE 1: [user][portal] Initializes portal module
+Cluster1@0.0: PE 1: [user][sync] Initializes sync module
+Cluster1@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster1@0.0: PE 0: [hal][core] halting...
+Cluster2@0.0: PE 0: [hal] booting up cluster...
+Cluster2@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster2@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster2@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster2@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster2@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster2@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster2@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster2@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster2@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster2@0.0: PE 0: [hal][core] booting up core...
+Cluster2@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster2@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster2@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster2@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster2@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster2@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster2@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster2@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster2@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster2@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster2@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster2@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster2@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster2@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster2@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster2@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster2@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster2@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster2@0.0: PE 1: [hal][core] booting up core...
+Cluster2@0.0: PE 2: [hal][core] booting up core...
+Cluster2@0.0: PE 3: [hal][core] booting up core...
+Cluster2@0.0: PE 4: [hal][core] booting up core...
+Cluster2@0.0: PE 5: [hal][core] booting up core...
+Cluster2@0.0: PE 6: [hal][core] booting up core...
+Cluster2@0.0: PE 7: [hal][core] booting up core...
+Cluster2@0.0: PE 8: [hal][core] booting up core...
+Cluster2@0.0: PE 9: [hal][core] booting up core...
+Cluster2@0.0: PE 10: [hal][core] booting up core...
+Cluster2@0.0: PE 11: [hal][core] booting up core...
+Cluster2@0.0: PE 12: [hal][core] booting up core...
+Cluster2@0.0: PE 13: [hal][core] booting up core...
+Cluster2@0.0: PE 14: [hal][core] booting up core...
+Cluster2@0.0: PE 15: [hal][core] booting up core...
+Cluster2@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster2@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster2@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster2@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster2@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster2@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster2@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster2@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster2@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster2@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster2@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster2@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster2@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster2@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster2@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster2@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster2@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster2@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster2@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster2@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster2@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster2@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster2@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster2@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster2@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster2@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster2@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster2@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster2@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster2@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster2@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster2@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster2@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster2@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster2@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster2@0.0: PE 1: [user][noc] initializing the noc system
+Cluster2@0.0: PE 1: [user][portal] Initializes portal module
+Cluster2@0.0: PE 1: [user][sync] Initializes sync module
+Cluster2@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster2@0.0: PE 0: [hal][core] halting...
+Cluster3@0.0: PE 0: [hal] booting up cluster...
+Cluster3@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster3@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster3@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster3@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster3@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster3@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster3@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster3@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster3@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster3@0.0: PE 0: [hal][core] booting up core...
+Cluster3@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster3@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster3@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster3@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster3@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster3@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster3@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster3@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster3@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster3@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster3@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster3@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster3@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster3@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster3@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster3@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster3@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster3@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster3@0.0: PE 1: [hal][core] booting up core...
+Cluster3@0.0: PE 2: [hal][core] booting up core...
+Cluster3@0.0: PE 3: [hal][core] booting up core...
+Cluster3@0.0: PE 4: [hal][core] booting up core...
+Cluster3@0.0: PE 5: [hal][core] booting up core...
+Cluster3@0.0: PE 6: [hal][core] booting up core...
+Cluster3@0.0: PE 7: [hal][core] booting up core...
+Cluster3@0.0: PE 8: [hal][core] booting up core...
+Cluster3@0.0: PE 9: [hal][core] booting up core...
+Cluster3@0.0: PE 10: [hal][core] booting up core...
+Cluster3@0.0: PE 11: [hal][core] booting up core...
+Cluster3@0.0: PE 12: [hal][core] booting up core...
+Cluster3@0.0: PE 13: [hal][core] booting up core...
+Cluster3@0.0: PE 14: [hal][core] booting up core...
+Cluster3@0.0: PE 15: [hal][core] booting up core...
+Cluster3@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster3@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster3@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster3@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster3@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster3@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster3@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster3@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster3@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster3@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster3@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster3@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster3@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster3@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster3@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster3@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster3@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster3@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster3@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster3@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster3@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster3@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster3@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster3@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster3@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster3@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster3@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster3@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster3@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster3@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster3@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster3@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster3@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster3@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster3@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster3@0.0: PE 1: [user][noc] initializing the noc system
+Cluster3@0.0: PE 1: [user][portal] Initializes portal module
+Cluster3@0.0: PE 1: [user][sync] Initializes sync module
+Cluster3@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster3@0.0: PE 0: [hal][core] halting...
+Cluster4@0.0: PE 0: [hal] booting up cluster...
+Cluster4@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster4@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster4@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster4@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster4@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster4@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster4@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster4@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster4@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster4@0.0: PE 0: [hal][core] booting up core...
+Cluster4@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster4@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster4@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster4@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster4@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster4@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster4@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster4@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster4@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster4@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster4@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster4@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster4@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster4@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster4@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster4@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster4@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster4@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster4@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster4@0.0: PE 1: [hal][core] booting up core...
+Cluster4@0.0: PE 2: [hal][core] booting up core...
+Cluster4@0.0: PE 3: [hal][core] booting up core...
+Cluster4@0.0: PE 4: [hal][core] booting up core...
+Cluster4@0.0: PE 5: [hal][core] booting up core...
+Cluster4@0.0: PE 6: [hal][core] booting up core...
+Cluster4@0.0: PE 7: [hal][core] booting up core...
+Cluster4@0.0: PE 8: [hal][core] booting up core...
+Cluster4@0.0: PE 9: [hal][core] booting up core...
+Cluster4@0.0: PE 10: [hal][core] booting up core...
+Cluster4@0.0: PE 11: [hal][core] booting up core...
+Cluster4@0.0: PE 12: [hal][core] booting up core...
+Cluster4@0.0: PE 13: [hal][core] booting up core...
+Cluster4@0.0: PE 14: [hal][core] booting up core...
+Cluster4@0.0: PE 15: [hal][core] booting up core...
+Cluster4@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster4@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster4@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster4@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster4@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster4@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster4@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster4@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster4@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster4@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster4@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster4@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster4@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster4@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster4@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster4@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster4@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster4@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster4@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster4@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster4@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster4@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster4@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster4@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster4@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster4@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster4@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster4@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster4@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster4@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster4@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster4@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster4@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster4@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster4@0.0: PE 1: [user][noc] initializing the noc system
+Cluster4@0.0: PE 1: [user][portal] Initializes portal module
+Cluster4@0.0: PE 1: [user][sync] Initializes sync module
+Cluster4@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster4@0.0: PE 0: [hal][core] halting...
+Cluster5@0.0: PE 0: [hal] booting up cluster...
+Cluster5@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster5@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster5@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster5@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster5@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster5@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster5@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster5@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster5@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster5@0.0: PE 0: [hal][core] booting up core...
+Cluster5@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster5@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster5@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster5@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster5@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster5@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster5@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster5@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster5@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster5@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster5@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster5@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster5@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster5@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster5@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster5@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster5@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster5@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster5@0.0: PE 1: [hal][core] booting up core...
+Cluster5@0.0: PE 2: [hal][core] booting up core...
+Cluster5@0.0: PE 3: [hal][core] booting up core...
+Cluster5@0.0: PE 4: [hal][core] booting up core...
+Cluster5@0.0: PE 5: [hal][core] booting up core...
+Cluster5@0.0: PE 6: [hal][core] booting up core...
+Cluster5@0.0: PE 7: [hal][core] booting up core...
+Cluster5@0.0: PE 8: [hal][core] booting up core...
+Cluster5@0.0: PE 9: [hal][core] booting up core...
+Cluster5@0.0: PE 10: [hal][core] booting up core...
+Cluster5@0.0: PE 11: [hal][core] booting up core...
+Cluster5@0.0: PE 12: [hal][core] booting up core...
+Cluster5@0.0: PE 13: [hal][core] booting up core...
+Cluster5@0.0: PE 14: [hal][core] booting up core...
+Cluster5@0.0: PE 15: [hal][core] booting up core...
+Cluster5@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster5@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster5@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster5@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster5@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster5@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster5@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster5@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster5@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster5@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster5@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster5@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster5@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster5@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster5@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster5@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster5@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster5@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster5@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster5@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster5@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster5@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster5@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster5@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster5@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster5@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster5@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster5@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster5@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster5@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster5@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster5@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster5@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster5@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster5@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster5@0.0: PE 1: [user][noc] initializing the noc system
+Cluster5@0.0: PE 1: [user][portal] Initializes portal module
+Cluster5@0.0: PE 1: [user][sync] Initializes sync module
+Cluster5@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster5@0.0: PE 0: [hal][core] halting...
+Cluster6@0.0: PE 0: [hal] booting up cluster...
+Cluster6@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster6@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster6@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster6@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster6@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster6@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster6@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster6@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster6@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster6@0.0: PE 0: [hal][core] booting up core...
+Cluster6@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster6@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster6@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster6@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster6@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster6@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster6@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster6@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster6@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster6@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster6@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster6@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster6@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster6@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster6@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster6@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster6@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster6@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster6@0.0: PE 1: [hal][core] booting up core...
+Cluster6@0.0: PE 2: [hal][core] booting up core...
+Cluster6@0.0: PE 3: [hal][core] booting up core...
+Cluster6@0.0: PE 4: [hal][core] booting up core...
+Cluster6@0.0: PE 5: [hal][core] booting up core...
+Cluster6@0.0: PE 6: [hal][core] booting up core...
+Cluster6@0.0: PE 7: [hal][core] booting up core...
+Cluster6@0.0: PE 8: [hal][core] booting up core...
+Cluster6@0.0: PE 9: [hal][core] booting up core...
+Cluster6@0.0: PE 10: [hal][core] booting up core...
+Cluster6@0.0: PE 11: [hal][core] booting up core...
+Cluster6@0.0: PE 12: [hal][core] booting up core...
+Cluster6@0.0: PE 13: [hal][core] booting up core...
+Cluster6@0.0: PE 14: [hal][core] booting up core...
+Cluster6@0.0: PE 15: [hal][core] booting up core...
+Cluster6@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster6@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster6@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster6@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster6@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster6@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster6@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster6@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster6@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster6@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster6@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster6@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster6@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster6@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster6@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster6@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster6@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster6@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster6@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster6@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster6@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster6@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster6@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster6@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster6@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster6@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster6@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster6@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster6@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster6@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster6@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster6@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster6@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster6@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster6@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster6@0.0: PE 1: [user][noc] initializing the noc system
+Cluster6@0.0: PE 1: [user][portal] Initializes portal module
+Cluster6@0.0: PE 1: [user][sync] Initializes sync module
+Cluster6@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster6@0.0: PE 0: [hal][core] halting...
+Cluster7@0.0: PE 0: [hal] booting up cluster...
+Cluster7@0.0: PE 0: [hal][cluster] initializing memory layout...
+Cluster7@0.0: PE 0: [hal][cluster] text = 304 KB data = 19 KB bss = 363 KB
+Cluster7@0.0: PE 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00008000
+Cluster7@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
+Cluster7@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f0000
+Cluster7@0.0: PE 0: [hal][cluster] kpool_base=0x000f0000 kpool_end=0x00118000
+Cluster7@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
+Cluster7@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=928 KB kpool=160 KB umem=512 KB
+Cluster7@0.0: PE 0: [core 0][hal] initializing tlb
+Cluster7@0.0: PE 0: [hal][core] booting up core...
+Cluster7@0.0: PE 0: [hal] exception stack at 0x0008f000
+Cluster7@0.0: PE 0: [hal][core] initializing interrupts...
+Cluster7@0.0: PE 1: [core 1][hal] initializing tlb
+Cluster7@0.0: PE 2: [core 2][hal] initializing tlb
+Cluster7@0.0: PE 3: [core 3][hal] initializing tlb
+Cluster7@0.0: PE 4: [core 4][hal] initializing tlb
+Cluster7@0.0: PE 5: [core 5][hal] initializing tlb
+Cluster7@0.0: PE 6: [core 6][hal] initializing tlb
+Cluster7@0.0: PE 7: [core 7][hal] initializing tlb
+Cluster7@0.0: PE 8: [core 8][hal] initializing tlb
+Cluster7@0.0: PE 9: [core 9][hal] initializing tlb
+Cluster7@0.0: PE 10: [core 10][hal] initializing tlb
+Cluster7@0.0: PE 11: [core 11][hal] initializing tlb
+Cluster7@0.0: PE 12: [core 12][hal] initializing tlb
+Cluster7@0.0: PE 13: [core 13][hal] initializing tlb
+Cluster7@0.0: PE 14: [core 14][hal] initializing tlb
+Cluster7@0.0: PE 15: [core 15][hal] initializing tlb
+Cluster7@0.0: PE 0: [hal][core] interrupt handler registered for irq 7
+Cluster7@0.0: PE 1: [hal][core] booting up core...
+Cluster7@0.0: PE 2: [hal][core] booting up core...
+Cluster7@0.0: PE 3: [hal][core] booting up core...
+Cluster7@0.0: PE 4: [hal][core] booting up core...
+Cluster7@0.0: PE 5: [hal][core] booting up core...
+Cluster7@0.0: PE 6: [hal][core] booting up core...
+Cluster7@0.0: PE 7: [hal][core] booting up core...
+Cluster7@0.0: PE 8: [hal][core] booting up core...
+Cluster7@0.0: PE 9: [hal][core] booting up core...
+Cluster7@0.0: PE 10: [hal][core] booting up core...
+Cluster7@0.0: PE 11: [hal][core] booting up core...
+Cluster7@0.0: PE 12: [hal][core] booting up core...
+Cluster7@0.0: PE 13: [hal][core] booting up core...
+Cluster7@0.0: PE 14: [hal][core] booting up core...
+Cluster7@0.0: PE 15: [hal][core] booting up core...
+Cluster7@0.0: PE 0: [hal][core] interrupt handler registered for irq 3
+Cluster7@0.0: PE 1: [hal] exception stack at 0x00090000
+Cluster7@0.0: PE 2: [hal] exception stack at 0x00091000
+Cluster7@0.0: PE 3: [hal] exception stack at 0x00092000
+Cluster7@0.0: PE 4: [hal] exception stack at 0x00093000
+Cluster7@0.0: PE 5: [hal] exception stack at 0x00094000
+Cluster7@0.0: PE 6: [hal] exception stack at 0x00095000
+Cluster7@0.0: PE 7: [hal] exception stack at 0x00096000
+Cluster7@0.0: PE 8: [hal] exception stack at 0x00097000
+Cluster7@0.0: PE 9: [hal] exception stack at 0x00098000
+Cluster7@0.0: PE 10: [hal] exception stack at 0x00099000
+Cluster7@0.0: PE 11: [hal] exception stack at 0x0009a000
+Cluster7@0.0: PE 12: [hal] exception stack at 0x0009b000
+Cluster7@0.0: PE 13: [hal] exception stack at 0x0009c000
+Cluster7@0.0: PE 14: [hal] exception stack at 0x0009d000
+Cluster7@0.0: PE 15: [hal] exception stack at 0x0009e000
+Cluster7@0.0: PE 0: [hal][core] interrupt handler registered for irq 4
+Cluster7@0.0: PE 0: [hal][sync] Sync Initialization.
+Cluster7@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
+Cluster7@0.0: PE 0: [hal][portal] Portal Initialization.
+Cluster7@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+Cluster7@0.0: PE 0: [kernel][mm] initializing the memory system
+Cluster7@0.0: PE 0: [kernel][mm] initializing the page frame allocator
+Cluster7@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
+Cluster7@0.0: PE 0: [kernel][mm] initializing the user page allocator
+Cluster7@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster7@0.0: PE 0: [hal][core] overwriting handler 0x00035158 for tlb fault
+Cluster7@0.0: PE 0: [hal][core] exception handler 0x00035158 registered for tlb fault
+Cluster7@0.0: PE 0: [hal][core] exception handler 0x00035268 registered for page fault
+Cluster7@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster7@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster7@0.0: PE 0: [kernel][noc] initializing the kportal facility
+Cluster7@0.0: PE 0: [kernel][noc] initializing the ksync facility
+Cluster7@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster7@0.0: PE 0: [kernel][dispatcher] Working on core 0!
+Cluster7@0.0: PE 1: [user][noc] initializing the noc system
+Cluster7@0.0: PE 1: [user][portal] Initializes portal module
+Cluster7@0.0: PE 1: [user][sync] Initializes sync module
+Cluster7@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster7@0.0: PE 0: [hal][core] halting...

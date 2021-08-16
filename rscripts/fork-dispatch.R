@@ -50,8 +50,8 @@ source(file = "rscripts/power.R")
 # Experiment Information
 #===============================================================================
 
-experiment.name = "fork-dispatch"
-experiment.nanvix.version = "08af852"
+experiment.name = "fork-join"
+experiment.nanvix.version = "900b52c"
 
 #===============================================================================
 # Input Reading
@@ -66,7 +66,6 @@ experiment.file<-ifelse(
 	paste(
 		"./results",
 		"cooked",
-		experiment.nanvix.version,
 		paste(experiment.name, "csv", sep = "."),
 		sep = "/"
 	)
@@ -80,6 +79,7 @@ outdir <- ifelse(
 )
 
 experiment.df <- read.table(file = experiment.file, sep = ";", header = TRUE)
+print(head(experiment.df))
 
 #===============================================================================
 # Filter

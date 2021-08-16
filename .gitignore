@@ -88,7 +88,6 @@ paper/*.pdf
 # VSCode
 .vscode/*
 
-results/raw/*
 results/cooked/*
 !results/plots/*
 !results/raw.tar.gz
