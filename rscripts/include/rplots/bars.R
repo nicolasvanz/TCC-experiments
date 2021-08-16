@@ -123,16 +123,10 @@ plot.bars2 <- function(
 	scale_x_discrete(
 		labels = axis.x.breaks
 	) +
-	scale_y_continuous(
-		expand = c(0, 0),
-		limits = axis.y.limits,
-		trans = axis.y.trans,
-		breaks = axis.y.breaks,
-		labels = trans_format(axis.y.trans, axis.y.trans.format)
-	) +
 	scale_fill_grey(
 		labels = legend.labels
 	) +
 	facet_grid(~ get(facet)) +
+	facet_wrap(~ get(facet),scales="free_y") +
 	theme_classic()
 }
