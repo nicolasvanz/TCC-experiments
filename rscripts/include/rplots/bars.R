@@ -16,6 +16,8 @@ plot.bars <- function(
 	legend.labels = NULL, legend.title = NULL,
 	data.labels.hjust = 0.0,
 	data.labels.vjust = -0.5,
+	data.labels.angle = 45,
+	data.labels.dodge = 0.8,
 	data.labels.digits,
 	axis.y.trans = 'identity',
 	axis.y.trans.fn = function(x) x,
@@ -44,9 +46,9 @@ plot.bars <- function(
 		),
 		hjust = data.labels.hjust,
 		vjust = data.labels.vjust,
-		position = position_dodge(width = 0.8),
-		angle = 45,
-		size = 6
+		position = position_dodge(width = data.labels.dodge),
+		angle = data.labels.angle,
+		size = 5
 	) +
 	labs(
 		title = title,
@@ -72,7 +74,7 @@ plot.bars <- function(
 }
 
 # Plots a bar chart.
-plot.bars2 <- function(
+plot.bars.facet <- function(
 	df,
 	var.x, var.y, factor, facet,
 	title = NULL, subtitle = NULL,
@@ -81,6 +83,8 @@ plot.bars2 <- function(
 	legend.labels = NULL, legend.title = NULL,
 	data.labels.hjust = 0.0,
 	data.labels.vjust = -0.5,
+	data.labels.angle = 45,
+	data.labels.dodge = 0.8,
 	data.labels.digits,
 	axis.y.trans = 'identity',
 	axis.y.trans.fn = function(x) x,
@@ -109,9 +113,9 @@ plot.bars2 <- function(
 		),
 		hjust = data.labels.hjust,
 		vjust = data.labels.vjust,
-		position = position_dodge(width = 0.8),
-		angle = 45,
-		size = 6
+		position = position_dodge(width = data.labels.dodge),
+		angle = data.labels.angle,
+		size = 5
 	) +
 	labs(
 		title = title,
@@ -123,10 +127,16 @@ plot.bars2 <- function(
 	scale_x_discrete(
 		labels = axis.x.breaks
 	) +
+	scale_y_continuous(
+		expand = c(0, 0),
+		limits = axis.y.limits,
+		trans = axis.y.trans,
+		breaks = axis.y.breaks,
+		labels = trans_format(axis.y.trans, axis.y.trans.format)
+	) +
 	scale_fill_grey(
 		labels = legend.labels
 	) +
 	facet_grid(~ get(facet)) +
-	facet_wrap(~ get(facet),scales="free_y") +
 	theme_classic()
 }

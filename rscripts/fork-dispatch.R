@@ -50,8 +50,8 @@ source(file = "rscripts/power.R")
 # Experiment Information
 #===============================================================================
 
-experiment.name = "fork-join"
-experiment.nanvix.version = "900b52c"
+experiment.name = "fork-dispatch"
+experiment.nanvix.version = "08af852"
 
 #===============================================================================
 # Input Reading
@@ -66,6 +66,7 @@ experiment.file<-ifelse(
 	paste(
 		"./results",
 		"cooked",
+		experiment.nanvix.version,
 		paste(experiment.name, "csv", sep = "."),
 		sep = "/"
 	)
@@ -79,17 +80,16 @@ outdir <- ifelse(
 )
 
 experiment.df <- read.table(file = experiment.file, sep = ";", header = TRUE)
-print(head(experiment.df))
 
 #===============================================================================
 # Filter
 #===============================================================================
 
 # Separate dataframes
-user.df   <- experiment.df %>% filter(type == "u")
-kernel.df <- experiment.df %>% filter(type == "k")
+user.df   <- experiment.df %>% filter(core == "u")
+kernel.df <- experiment.df %>% filter(core == "k")
 
-variables.id <- c("version", "operation", "amount")
+variables.id <- c("kernel", "operation", "amount")
 variables <- c("cycles")
 
 #===============================================================================
@@ -101,7 +101,7 @@ variables <- c("cycles")
 #===============================================================================
 
 # Convert cycles to ms
-user.df$cycles <- user.df$cycles/MPPA.FREQ/MICRO
+user.df$cycles <- user.df$cycles/MPPA.FREQ/MILLI
 
 user.df.melted <- melt(
 	data = user.df,
@@ -118,7 +118,40 @@ user.df.cooked <- ddply(
 	cv = sd(value)/mean(value)
 )
 
-print(user.df.cooked)
+user.df.cooked.total <- aggregate(
+	x   = user.df.cooked$mean,
+	by  = list(user.df.cooked$kernel, user.df.cooked$amount),
+	FUN = sum
+)
+
+#==============================================================================
+
+user.df.cooked <- user.df.cooked %>%
+	mutate(overhead = ifelse(amount == 1, 0, mean - lag(mean)))
+
+user.df.cooked.overhead <- aggregate(
+	x   = user.df.cooked$overhead,
+	by  = list(user.df.cooked$kernel, user.df.cooked$operation),
+	FUN = mean 
+)
+
+print("Fork/Dispatch Overhead:")
+print(head(user.df.cooked.overhead))
+
+#==============================================================================
+
+user.df.t.wait <- user.df.cooked %>% filter(operation == "j" & kernel == "fork-join")
+user.df.d.wait <- user.df.cooked %>% filter(operation == "j" & kernel == "dispatch-wait")
+
+user.df.end <- user.df.t.wait$mean/user.df.d.wait$mean
+print(paste("max wait: ", max(user.df.end)))
+
+user.df.join <- user.df.cooked %>% filter(operation == "f" & kernel == "fork-join")
+user.df.disp <- user.df.cooked %>% filter(operation == "f" & kernel == "dispatch-wait")
+
+user.df.start <- user.df.join$mean/user.df.disp$mean
+print(paste("min start: ", min(user.df.start)))
+print(paste("max start: ", max(user.df.start)))
 
 #==============================================================================
 # Plot Configuration
@@ -128,35 +161,35 @@ plot.df <- user.df.cooked
 
 plot.x      <- "amount"
 plot.y      <- "mean"
-plot.factor <- "version"
-plot.facet  <- "operation"
+plot.factor <- "operation"
+plot.facet  <- "kernel"
 
 # Titles
-plot.title    <- "ABC"
+plot.title    <- "Latencies of Thread Module and Task Engine Operations"
 plot.subtitle <- paste("Nanvix Version", experiment.nanvix.version, sep = " ")
 
 # Legend
-plot.legend.title <- "Version"
-plot.legend.labels <- c("New", "Old")
+plot.legend.title <- "Operations"
+plot.legend.labels <- c("Fork/Dispatch", "Join/Wait")
 
 # X Axis
-plot.axis.x.title <- "Number of Threads"
-plot.axis.x.breaks <- seq(from = 1, to = max(plot.df$amount), by = 1)
+plot.axis.x.title <- "Number of Execution Flows"
+plot.axis.x.breaks <- seq(from = 1, to = max(plot.df$amount), by = 2)
 
 # Y Axis
 plot.axis.y.title <- "Time (ms)"
-plot.axis.y.breaks <- seq(from = 0, to = 4, by = 1)
-plot.axis.y.limits <- c(0, 4)
+plot.axis.y.breaks <- seq(from = 0, to = 14, by = 2)
+plot.axis.y.limits <- c(0, 14)
 
 # Facets
-#plot.df$kernel <- factor(plot.df$kernel, levels=c("fork-join", "dispatch-wait"))
-#levels(plot.df$kernel) <- c("Fork-Join", "Dispatch-Wait")
+plot.df$kernel <- factor(plot.df$kernel, levels=c("fork-join", "dispatch-wait"))
+levels(plot.df$kernel) <- c("Fork-Join", "Dispatch-Wait")
 
 #===============================================================================
 # Plot
 #===============================================================================
 
-plot <- plot.bars2(
+plot <- plot.stacks(
 	df = plot.df,
 	var.x = plot.x,
 	var.y = plot.y,
@@ -168,10 +201,9 @@ plot <- plot.bars2(
 	axis.y.breaks = plot.axis.y.breaks,
 	axis.y.limits = plot.axis.y.limits,
 	legend.title = plot.legend.title,
-	legend.labels = plot.legend.labels,
-	data.labels.digits = 0
+	legend.labels = plot.legend.labels
 ) + plot.theme.title +
-	plot.theme.legend.top.left +
+	plot.theme.legend.top.right +
 	plot.theme.axis.x +
 	plot.theme.axis.y +
 	plot.theme.grid.wall +
@@ -186,8 +218,6 @@ plot.save(
 	directory = outdir,
 	filename  = paste(experiment.name, "user-time", sep = "-")
 )
-
-return (1)
 
 if (do_arrange)
 {
