@@ -39,17 +39,17 @@ plot.bars <- function(
 		colour = "black",
 		position = position
 	) +
-	geom_text(
-		aes(
-			label = round(get(var.y), data.labels.digits),
-			group = get(factor)
-		),
-		hjust = data.labels.hjust,
-		vjust = data.labels.vjust,
-		position = position_dodge(width = data.labels.dodge),
-		angle = data.labels.angle,
-		size = 5
-	) +
+ 	geom_text(
+ 		aes(
+ 			label = round(get(var.y), data.labels.digits),
+ 			group = get(factor)
+ 		),
+ 		hjust = data.labels.hjust,
+ 		vjust = data.labels.vjust,
+ 		position = position_dodge(width = data.labels.dodge),
+ 		angle = data.labels.angle,
+ 		size = 5
+ 	) +
 	labs(
 		title = title,
 		subtitle = subtitle,
@@ -106,17 +106,17 @@ plot.bars.facet <- function(
 		colour = "black",
 		position = position
 	) +
-	geom_text(
-		aes(
-			label = round(get(var.y), data.labels.digits),
-			group = get(factor)
-		),
-		hjust = data.labels.hjust,
-		vjust = data.labels.vjust,
-		position = position_dodge(width = data.labels.dodge),
-		angle = data.labels.angle,
-		size = 5
-	) +
+#	geom_text(
+#		aes(
+#			label = round(get(var.y), data.labels.digits),
+#			group = get(factor)
+#		),
+#		hjust = data.labels.hjust,
+#		vjust = data.labels.vjust,
+#		position = position_dodge(width = data.labels.dodge),
+#		angle = data.labels.angle,
+#		size = 5
+#	) +
 	labs(
 		title = title,
 		subtitle = subtitle,

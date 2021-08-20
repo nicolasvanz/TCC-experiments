@@ -39,7 +39,7 @@ fi
 #===============================================================================
 
 DIR_CURRENT=$PWD
-DIR_PLOTS="$DIR_CURRENT/results/plots"
+DIR_PLOTS="$DIR_CURRENT/plots"
 DIR_RESULTS_BASE="$DIR_CURRENT/results"
 DIR_RESULTS_EXPSET="$DIR_RESULTS_BASE"
 DIR_RESULTS_RAW="$DIR_RESULTS_EXPSET/raw"

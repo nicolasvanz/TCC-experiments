@@ -37,15 +37,7 @@ function plot() {
 hash=08af852
 
 # Experiments
-for exp in fork-dispatch;
-do
-	plot $exp $hash
-done
-
-hash=4ef39d3
-
-# Experiments
-for exp in heartbeat-core-usage syscalls services;
+for exp in fork-join;
 do
 	plot $exp $hash
 done

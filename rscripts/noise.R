@@ -51,7 +51,7 @@ source(file = "rscripts/power.R")
 # Experiment Information
 #===============================================================================
 
-experiment.name = "fork-join"
+experiment.name = "noise"
 experiment.nanvix.version = "123456"
 
 #===============================================================================
@@ -86,11 +86,9 @@ experiment.df <- read.table(file = experiment.file, sep = ";", header = TRUE)
 #===============================================================================
 
 # Separate dataframes
-user.df   <- experiment.df %>% filter(type == "u")
 kernel.df <- experiment.df %>% filter(type == "k")
 
 # Convert cycles to ms
-user.df$cycles   <- user.df$cycles/MPPA.FREQ/MILLI
 kernel.df$cycles <- kernel.df$cycles/MPPA.FREQ/MILLI
 
 #===============================================================================
