@@ -108,7 +108,7 @@ function configureRemote
 
 	echo "[+] Configuring remote"
 
-	ssh $platform "rm -rf $basedir/* ; mkdir $basedir/benchmarks"
+	ssh $platform "rm -rf $basedir/* ; mkdir $basedir/libnanvix"
 	$UPLOAD $scripts/arch/$platform/$runfile.sh $platform:$basedir
 }
 
@@ -182,7 +182,7 @@ function run
 
 function run_benchs
 {
-	for exp in noise fork-join;
+	for exp in libnanvix-test;
 	do
 		img=mppa256-$exp.img
 

@@ -34,7 +34,7 @@ source $DIR_SCRIPT/const.sh
 function concatenate {
 	runlogs=$1
 
-	cat $runlogs-*
+	cat $runlogs*
 }
 
 #
@@ -131,65 +131,20 @@ echo "[+] Parsing services (task)"
 
 # Write header.
 
-for exp in fork-join;
+for exp in libnanvix-test;
 do
 	csvfile=$DIR_RESULTS_COOKED/$exp.csv
-	powerfile=$DIR_RESULTS_COOKED/$exp-profile.csv
 
-	echo "version;type;it;operation;amount;dtlb;itlb;reg;branch;dcache;icache;cycles" > $csvfile
-	echo "version;component;it;time;power" > $powerfile
+	echo "time" > $csvfile
 
-	for h in $hash0 $hash1;
+	for h in $hash1;
 	do
 		runlogfile=$DIR_RESULTS_RAW/$h/$exp
-		if [ $h == $NEW_HASH ];
-		then
-			version="new"
-		else
-			version="old"
-		fi
 
 		concatenate $runlogfile   | \
-			filter "benchmarks" 6 | \
-			format "\[|\]" " "    | \
-			format "  " " "       | \
-			cut -d " " -f 4-      | \
-			format " "  ";"       | \
-			format "^"  "$version;" \
+			grep -E "time"        | \
+			cut -d " " -f 5-        \
 		>> $csvfile
 
-		parse_powerlog $DIR_RESULTS_RAW $hash1 $exp $powerfile $version
-	done
-done
-
-
-for exp in noise;
-do
-	csvfile=$DIR_RESULTS_COOKED/$exp.csv
-	powerfile=$DIR_RESULTS_COOKED/$exp-profile.csv
-
-	echo "version;it;noise;nworkers;nidle;cycles;icache;dcache;branch;reg;itlb;dtlb" > $csvfile
-	echo "version;component;it;time;power" > $powerfile
-
-	for h in $hash0 $hash1;
-	do
-		runlogfile=$DIR_RESULTS_RAW/$h/$exp
-		if [ $h == $NEW_HASH ];
-		then
-			version="new"
-		else
-			version="old"
-		fi
-
-		concatenate $runlogfile   | \
-			filter "benchmarks" 6 | \
-			format "\[|\]" " "    | \
-			format "  " " "       | \
-			cut -d " " -f 4-      | \
-			format " "  ";"       | \
-			format "^"  "$version;" \
-		>> $csvfile
-
-		parse_powerlog $DIR_RESULTS_RAW $hash1 $exp $powerfile $version
 	done
 done

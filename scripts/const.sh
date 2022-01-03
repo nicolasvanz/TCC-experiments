@@ -45,8 +45,9 @@ DIR_RESULTS_EXPSET="$DIR_RESULTS_BASE"
 DIR_RESULTS_RAW="$DIR_RESULTS_EXPSET/raw"
 DIR_RESULTS_COOKED="$DIR_RESULTS_EXPSET/cooked"
 DIR_RSCRIPTS="$DIR_CURRENT/rscripts"
+DIR_PSCRIPTS="$DIR_CURRENT/pythonscripts"
 DIR_SCRIPTS="$DIR_CURRENT/scripts"
-BASEDIR_REMOTE="~/nanvix"
+BASEDIR_REMOTE="~/nicolas"
 
 #===============================================================================
 # Files
@@ -58,16 +59,17 @@ FILE_RUNLOG="nanvix-cluster"
 # Experiment
 #===============================================================================
 
-NITERATIONS=10
+NITERATIONS=100
 PLATFORM="mppa"
 
 # Benchmark folders
-DIR_REMOTE="$BASEDIR_REMOTE/benchmarks"
-DIR_SOURCE="$DIR_CURRENT/code/benchmarks"
+DIR_REMOTE="$BASEDIR_REMOTE/libnanvix"
+DIR_SOURCE="$DIR_CURRENT/code/libnanvix"
 
 # Benchmark versions
-OLD_COMMIT="53e3ff81b64223ee6da302c2232a111023c2bef8"
-OLD_HASH="53e3ff8"
+OLD_COMMIT="942795d1fdbcaa233c4c74c947d27d06c1e86254"
+OLD_HASH="942795d"
+
 NEW_COMMIT="900b52cab37f23c5378187fa6fc7b04bacf2fe7d"
 NEW_HASH="900b52c"
 

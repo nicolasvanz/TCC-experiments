@@ -26,7 +26,7 @@ DIR_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" >/dev/null 2>&1 && pwd  )"
 
 source $DIR_SCRIPT/const.sh
 
-function plot() {
+function rplot() {
 	exp=$1
 	version=$2
 
@@ -34,13 +34,27 @@ function plot() {
 	Rscript --vanilla $DIR_RSCRIPTS/$exp.R results/cooked/$version/$exp.csv
 }
 
-hash=08af852
+function pplot(){
+	exp=$1
+	version=$1
+
+	cd $DIR_PSCRIPTS
+	python3 -m virtualenv venv
+	source venv/bin/activate
+	pip3 install -r requirements.txt
+
+	python3 $exp.py $exp.csv
+	deactivate
+}
+
+hash=942795d-baseline
 
 # Experiments
-for exp in fork-join;
+for exp in libnanvix-test;
 do
-	plot $exp $hash
+	#rplot $exp $hash
+	pplot $exp $hash
 done
 
-rm Rplots.pdf
-mv *.pdf $DIR_PLOTS
+#rm Rplots.pdf
+#mv *.pdf $DIR_PLOTS
