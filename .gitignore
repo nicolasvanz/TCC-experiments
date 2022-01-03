@@ -91,3 +91,5 @@ paper/*.pdf
 results/cooked/*
 !results/plots/*
 !results/raw.tar.gz
+
+pythonscripts/venv
