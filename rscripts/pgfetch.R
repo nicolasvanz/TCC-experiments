@@ -22,37 +22,20 @@
 # SOFTWARE.
 #
 
-do_arrange <- TRUE
-
 # R Libraries
-library(plyr)
 library(ggplot2)
 library(reshape2)
 library(scales)
-library(dplyr, warn.conflicts = FALSE)
-if (do_arrange)
-{
-	library(grid, warn.conflicts = FALSE)
-	library(gridExtra, warn.conflicts = FALSE)
-	#library(ggpubr)
-}
+library(plyr)
+library(tidyverse)
 
 # My Utilities
-source(file = "rscripts/include/rplots/utils.R")
-source(file = "rscripts/include/rplots/theme.R")
-source(file = "rscripts/include/rplots/stacks.R")
-source(file = "rscripts/include/rplots/bars.R")
-source(file = "rscripts/include/rplots/lines.R")
-source(file = "rscripts/include/utils.R")
-source(file = "rscripts/include/consts.R")
+source(file = "rscripts/rplots/lines.R")
+source(file = "rscripts/rplots/bars.R")
+source(file = "rscripts/rplots/theme.R")
+source(file = "rscripts/rplots/utils.R")
+source(file = "rscripts/consts.R")
 source(file = "rscripts/power.R")
-
-#===============================================================================
-# Experiment Information
-#===============================================================================
-
-experiment.name = "migration"
-experiment.nanvix.version = "123456"
 
 #===============================================================================
 # Input Reading
@@ -60,45 +43,46 @@ experiment.nanvix.version = "123456"
 
 args = commandArgs(trailingOnly=TRUE)
 
-# Experiment File
-experiment.file<-ifelse(
-	length(args) >= 2,
-	args[1],
-	paste(
-		"./results",
-		"cooked",
-		paste(experiment.name, "csv", sep = "."),
-		sep = "/"
-	)
-)
+if (length(args) >= 3) {
+	experiment.infile <- args[1]
+	experiment.outdir <- args[2]
+	experiment.outfile <- args[3]
+} else {
+	experiment.infile <- "./results/cooked/services/pgfetch.csv"
+	experiment.outdir <- "./results/plots/services"
+	experiment.outfile <- "pgfetch"
+}
 
-# Output Directory
-outdir <- ifelse(
-	length(args) >= 2,
-	args[2],
-	getwd()
-)
+if (length(args) >= 4) {
+	experiment.power.it <- args[4]
+} else {
+	experiment.power.it <- 0
+}
 
-experiment.df <- read.table(file = experiment.file, sep = ";", header = TRUE)
+#===============================================================================
+# Input Reading
+#===============================================================================
+
+experiment.df <- read_delim(
+	file = experiment.infile,
+	col_names = TRUE,
+	delim = ";"
+)
 
 #===============================================================================
 # Filter
 #===============================================================================
 
 # Convert cycles to ms
-experiment.df$migration <- "Migration"
-experiment.df$time      <- experiment.df$time / MPPA.FREQ / MILLI
-
-#===============================================================================
-# User
-#===============================================================================
+experiment.df$time <- experiment.df$time/MPPA.FREQ/MILLI
+experiment.df <- experiment.df %>% filter(nprocs == 1)
 
 #===============================================================================
 # Pre-Processing
 #===============================================================================
 
-variables.id <- c("migration")
-variables    <- c("time")
+variables.id <- c("version", "nprocs")
+variables <- c("time")
 
 experiment.df.melted <- melt(
 	data = experiment.df,
@@ -116,65 +100,68 @@ experiment.df.cooked <- ddply(
 )
 
 #==============================================================================
-# Plots
+# Plot Configuration
 #==============================================================================
 
 plot.df <- experiment.df.cooked
 
-print(plot.df)
-
-plot.x      <- "variable"
-plot.y      <- "mean"
-plot.factor <- "migration"
+plot.x = "version"
+plot.y = "mean"
+plot.factor = "version"
 
 # Titles
-plot.title    <- NULL
-plot.subtitle <- NULL
+plot.title <- NULL#"Response Time of User/Dispatcher Kernel Calls"
+plot.subtitle <- NULL#paste("Nanvix Version", experiment.nanvix.version, sep = " ")
 
 # Legend
-plot.legend.title  <- NULL
-plot.legend.labels <- NULL
+plot.legend.title <- NULL#"Version"
+plot.legend.labels <- NULL#levels(as.factor(plot.df$version))
 
 # X Axis
-plot.axis.x.title <- "Migração"
-plot.axis.x.breaks <- NULL
+plot.axis.x.title <- "Number of Processes (Compute Clusters)"
+plot.axis.x.breaks <- levels(as.factor(plot.df$version))
 
 # Y Axis
-plot.axis.y.title <- "Tempo (ms)"
-plot.axis.y.breaks <- seq(from = 0, to = 250, length.out = 11)
-plot.axis.y.limits <- c(0, 250)
+plot.axis.y.title <- "Time (ms)"
+plot.axis.y.breaks <- seq(from = 0, to = 1.4, by = 0.2) # by = 10
+plot.axis.y.limits <- c(0, 1.5)
+
+# Data Labels
+plot.data.labels.digits <- 2
 
 #===============================================================================
 # Plot
 #===============================================================================
 
-plot <- plot.bars(
-	df = plot.df,
-	var.x = plot.x,
-	var.y = plot.y,
-	factor = plot.factor,
-	axis.x.title = plot.axis.x.title,
-	axis.x.breaks = plot.axis.x.breaks,
-	axis.y.title = plot.axis.y.title,
-	axis.y.breaks = plot.axis.y.breaks,
-	axis.y.limits = plot.axis.y.limits,
-	legend.title = plot.legend.title,
-	legend.labels = plot.legend.labels,
-	data.labels.digits = 0
-) + plot.theme.title +
-	plot.theme.legend.none +
-	plot.theme.axis.x +
-	plot.theme.axis.y +
-	plot.theme.grid.wall +
-	plot.theme.grid.major +
-	plot.theme.grid.minor +
-	plot.theme.facet.x
+	plot <- plot.bars(
+		df = plot.df,
+		var.x = plot.x,
+		var.y = plot.y,
+		factor = plot.factor,
+		legend.title = plot.legend.title,
+		legend.labels = plot.legend.labels,
+		axis.x.title = plot.axis.x.title,
+		axis.x.breaks = plot.axis.x.breaks,
+		axis.y.title = plot.axis.y.title,
+		axis.y.limits = plot.axis.y.limits,
+		data.labels.digits = plot.data.labels.digits
+	) + plot.theme.title +
+		plot.theme.legend.none +
+		plot.theme.axis.x +
+		plot.theme.axis.y +
+		plot.theme.grid.wall +
+		plot.theme.grid.major +
+		plot.theme.grid.minor
 
 plot.save(
 	plot = plot,
-	width = 2.5,
+	width = 7,
 	height = 5,
-	directory = outdir,
-	filename  = paste(experiment.name, sep = "-")
+	directory = experiment.outdir,
+	filename  = paste(
+		experiment.outfile,
+		"time",
+		sep = "-"
+	)
 )
 
