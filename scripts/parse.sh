@@ -34,7 +34,7 @@ source $DIR_SCRIPT/const.sh
 function concatenate {
 	runlogs=$1
 
-	cat $runlogs*
+	cat $runlogs-*
 }
 
 #
@@ -52,30 +52,7 @@ function filter {
 # Formats raw results.
 #
 function format {
-	from=$1
-	to=$2
-
-	$SED -E -e "s/$from/$to/g"
-}
-
-#
-# parse run logs
-#
-function parse_runlog {
-	dir=$1
-	hash=$2
-	exp=$3
-	outfile=$4
-
-	runlogfile=$dir/$hash/$exp
-
-	concatenate $runlogfile   | \
-		filter "benchmarks" 6 | \
-		format "\[|\]" " "    | \
-		format "  " " "       | \
-		cut -d " " -f 3-      | \
-		format " "  ";"         \
-	>> $outfile
+	$SED -e "s/ /;/g"
 }
 
 #
@@ -84,16 +61,18 @@ function parse_runlog {
 function parse_powerlog {
 	dir=$1
 	hash=$2
-	exp=$3
-	outfile=$4
-	version=$5
+	middle=$3
+	nprocs=$4
+	exp=$5
+	outfile=$6
+	version=$7
 
 	# Clean up long names
-	for it in {0..9};
+	for it in {0..4};
 	do
-		for component in mppa-power; # ddr0-power ddr1-power mppa-temp plx-tmp
+		for component in mppa-power;
 		do
-			powerlogfile=$dir/$hash/profile-$component-$exp-nanvix-cluster-$it
+			powerlogfile=$dir/$hash-procs-$middle$nprocs/profile-$component-$exp-nanvix-cluster-$it
 
 			if [ ! -e $powerlogfile ];
 			then
@@ -101,50 +80,142 @@ function parse_powerlog {
 				continue
 			fi
 
-			cat $powerlogfile                         | \
-				$SED "$ d"                            | \
-				format " " ";"                        | \
-				format "^" "$version;$component;$it;"   \
+			cat $powerlogfile                                   | \
+				$SED "$ d"                                      | \
+				format                                          | \
+				$SED -e "s/^/$version;$component;$nprocs;$it;/"   \
 			>> $outfile
 		done
 	done
 
 	# Clean up long names
-	$SED -i -e "s/ddr0-power/ddr0/g" $outfile
-	$SED -i -e "s/ddr1-power/ddr1/g" $outfile
 	$SED -i -e "s/mppa-power/power/g" $outfile
-	$SED -i -e "s/mppa-temp/temp/g" $outfile
-	$SED -i -e "s/plx-tmp/plx/g" $outfile
 }
 
-#===============================================================================
-# Services
-#===============================================================================
+#
+# parse power logs
+#
+function parse_powerlog_services {
+	dir=$1
+	hash=$2
+	nprocs=$3
+	exp=$4
+	outfile=$5
+	version=$6
 
-hash0=$NEW_HASH
-hash1="$OLD_HASH-baseline"
-mkdir -p $DIR_RESULTS_COOKED/
+	# Clean up long names
+	#for it in 0;
+	#do
+		for component in mppa-power;
+		do
+			powerlogfile=$dir/$hash-$exp/profile-$component-$exp-nanvix-cluster-$nprocs
 
+			if [ ! -e $powerlogfile ];
+			then
+				echo "Missing $nprocs execution of $exp ($version) : $powerlogfile"
+				continue
+			fi
 
+			cat $powerlogfile                                      | \
+				$SED "$ d"                                         | \
+				format                                             | \
+				$SED -e "s/^/$exp;$version;$component;$nprocs;0;/"   \
+			>> $outfile
+		done
+	#done
 
-echo "[+] Parsing services (task)"
+	# Clean up long names
+	$SED -i -e "s/mppa-power/power/g" $outfile
+}
 
-# Write header.
+: << END
 
-for exp in libnanvix-test;
+#================================================================================
+
+baseline_hash=$BASELINE_HASH-baseline
+comm_hash=$BASELINE_HASH-comm
+task_hash=$TASK_HASH-task
+
+mkdir -p $DIR_RESULTS_COOKED/capbench/
+
+for exp in fast is lu;
 do
-	csvfile=$DIR_RESULTS_COOKED/$exp.csv
+	echo "parsing $exp ..."
 
-	echo "time" > $csvfile
+	csvfile=$DIR_RESULTS_COOKED/capbench/$exp.csv
+	powerfile=$DIR_RESULTS_COOKED/capbench/$exp-profile.csv
+	raw_dir=$DIR_RESULTS_RAW
 
-	for h in $hash1;
+	# Write header.
+	echo "exp;api;nprocs;time" > $csvfile
+	echo "version;component;nprocs;it;time;power" > $powerfile
+
+	for nprocs in {12,24,48,96,192};
 	do
-		runlogfile=$DIR_RESULTS_RAW/$h/$exp
+		for versions in baseline,$baseline_hash comm,$comm_hash daemons,$task_hash;
+		do
+			IFS=","
+			set -- $versions
 
-		concatenate $runlogfile   | \
-			grep -E "time"        | \
-			cut -d " " -f 5-        \
-		>> $csvfile
+			version=$1
+			hash=$2
 
+			cat $raw_dir/$hash-procs-$nprocs/$exp-nanvix-cluster-* | \
+				grep "total time"                                  | \
+				sed -E "s/[[:space:]]+/ /g"                        | \
+				cut -d" " -f 9                                     | \
+				sed -E "s/^/$exp;$version;$nprocs;/g"                \
+			>> $csvfile
+
+			parse_powerlog $raw_dir $hash "" $nprocs $exp $powerfile "$version"
+		done
 	done
 done
+
+baseline_hash=$BASELINE_HASH-baseline
+comm_hash=$BASELINE_HASH-comm
+task_hash=$TASK_HASH-task
+
+mkdir -p $DIR_RESULTS_COOKED/detail
+
+for exp in gf;
+do
+	echo "parsing $exp ..."
+
+	csvfile=$DIR_RESULTS_COOKED/detail/$exp.csv
+	powerfile=$DIR_RESULTS_COOKED/detail/$exp-profile.csv
+	raw_dir=$DIR_RESULTS_RAW
+
+	# Write header.
+	echo "variant;cluster;type;id;cycle;amount" > $csvfile
+
+	for nprocs in {12,24,48,96,192};
+	do
+		for versions in baseline,$baseline_hash;
+		do
+			IFS=","
+			set -- $versions
+
+			variant=$1
+			hash=$2
+
+			cat $raw_dir/$hash-procs-$nprocs/$exp-nanvix-cluster-* | \
+				grep "detail"                                      | \
+				sed -E "s/[[:space:]]+/ /g"                        | \
+				cut -d" " -f 7-                                    | \
+				sed -E "s/[[:space:]]+/;/g"                        | \
+				sed -E "s/^/$variant;$nprocs;/g"                     \
+			>> $csvfile
+		done
+	done
+done
+
+END
+
+cat results/raw/bottleneck-detail \
+  | grep "bottleneck" \
+  |  sed -E "s/[[:space:]]+/ /g" \
+  |  cut -d" " -f 9 \
+  |  sed -E "s/^/it;tasks;size;unit;total;for/g" \
+  >> results/cooked/bottleneck
+

@@ -26,35 +26,65 @@ DIR_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" >/dev/null 2>&1 && pwd  )"
 
 source $DIR_SCRIPT/const.sh
 
-function rplot() {
-	exp=$1
-	version=$2
+function plot() {
+	category=$1
+	script=$2
+	exp=$3
+	power_it=$3
 
-	echo "plotting $exp $version"
-	Rscript --vanilla $DIR_RSCRIPTS/$exp.R results/cooked/$version/$exp.csv
+	cecho $BLUE "plotting $exp ..."
+
+	Rscript --vanilla $DIR_RSCRIPTS/$script.R  \
+		$DIR_RESULTS_COOKED/$category/$exp.csv \
+		$DIR_PLOTS/$category                   \
+		$exp                                   \
+		$power_it
 }
 
-function pplot(){
-	exp=$1
-	version=$1
+mkdir -p $DIR_PLOTS/capbench
+mkdir -p $DIR_PLOTS/services
+mkdir -p $DIR_PLOTS/microbenchmarks
 
-	cd $DIR_PSCRIPTS
-	python3 -m virtualenv venv
-	source venv/bin/activate
-	pip3 install -r requirements.txt
-
-	python3 $exp.py $exp.csv
-	deactivate
-}
-
-hash=942795d-baseline
-
-# Experiments
-for exp in libnanvix-test;
+# Category
+for args in fn,1 gf,1 km,1;
 do
-	#rplot $exp $hash
-	pplot $exp $hash
+	#=======================================================================
+	# Separates parameters: Experiment + Iteration used in the calculation of
+	# energy consumption
+	#=======================================================================
+	IFS=","
+	set -- $args
+
+	exp=$1
+	power_it=$2
+	#=======================================================================
+
+	plot capbench capbench $exp $power_it
 done
 
-#rm Rplots.pdf
+# Services
+plot services services services 0
+
+# Services
+plot services sizes sizes 0
+
+# Category
+for args in core-usage,0 syscalls,1 create-wait,1;
+do
+	#=======================================================================
+	# Separates parameters: Experiment + Iteration used in the calculation of
+	# energy consumption
+	#=======================================================================
+	IFS=","
+	set -- $args
+
+	exp=$1
+	power_it=$2
+	#=======================================================================
+
+	plot microbenchmarks $exp $exp $power_it
+done
+
+rm Rplots.pdf
 #mv *.pdf $DIR_PLOTS
+

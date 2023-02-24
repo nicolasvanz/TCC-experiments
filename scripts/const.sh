@@ -27,6 +27,8 @@
 #===============================================================================
 
 UPLOAD="rsync -avz --delete-after --exclude='*.o' --exclude='.git' --exclude='*.swp' --exclude='doc'"
+COMPILE_AND_RUN="bash ../compile_and_run.sh"
+JUST_RUN="bash ../just_run.sh"
 RUN="bash ../run.sh"
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	SED="gsed"
@@ -34,20 +36,30 @@ else
 	SED="sed"
 fi
 
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+function cecho
+{
+	echo -e "$1$2$NC"
+}
+
 #===============================================================================
 # Directories
 #===============================================================================
 
 DIR_CURRENT=$PWD
-DIR_PLOTS="$DIR_CURRENT/plots"
+DIR_PLOTS="$DIR_CURRENT/results/plots"
 DIR_RESULTS_BASE="$DIR_CURRENT/results"
 DIR_RESULTS_EXPSET="$DIR_RESULTS_BASE"
 DIR_RESULTS_RAW="$DIR_RESULTS_EXPSET/raw"
 DIR_RESULTS_COOKED="$DIR_RESULTS_EXPSET/cooked"
 DIR_RSCRIPTS="$DIR_CURRENT/rscripts"
-DIR_PSCRIPTS="$DIR_CURRENT/pythonscripts"
 DIR_SCRIPTS="$DIR_CURRENT/scripts"
-BASEDIR_REMOTE="~/nicolas"
+BASEDIR_REMOTE="~/souto"
 
 #===============================================================================
 # Files
@@ -59,17 +71,24 @@ FILE_RUNLOG="nanvix-cluster"
 # Experiment
 #===============================================================================
 
-NITERATIONS=100
+NITERATIONS=3
 PLATFORM="mppa"
 
 # Benchmark folders
-DIR_REMOTE="$BASEDIR_REMOTE/libnanvix"
-DIR_SOURCE="$DIR_CURRENT/code/libnanvix"
+BENCHMARK_DIR_REMOTE="$BASEDIR_REMOTE/benchmarks"
+BENCHMARK_DIR_SOURCE="$DIR_CURRENT/code/benchmarks"
 
-# Benchmark versions
-OLD_COMMIT="942795d1fdbcaa233c4c74c947d27d06c1e86254"
-OLD_HASH="942795d"
+# Baseline version
+BASELINE_COMMIT="0cc2b9df818cb83fd80023cb124ade6632816ce7"
+BASELINE_HASH="0cc2b9d"
 
-NEW_COMMIT="900b52cab37f23c5378187fa6fc7b04bacf2fe7d"
-NEW_HASH="900b52c"
+# Baseline version
+TASK_COMMIT="a9640c87924ae1fe4c42ccd01d07c49845036951"
+TASK_HASH="a9640c8"
 
+# Current version
+DIR_REMOTE=$BENCHMARK_DIR_REMOTE
+DIR_SOURCE=$BENCHMARK_DIR_SOURCE
+COMMIT=$TASK_COMMIT
+HASH=$TASK_HASH
+OUTDIR=$DIR_RESULTS_RAW/$HASH
