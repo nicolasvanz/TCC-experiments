@@ -130,9 +130,9 @@ function configureRemote
 	basedir=$3
 
 	ssh $platform "rm -rf $basedir/* ; \
-		mkdir $basedir/benchmarks"
+		mkdir $basedir/libnanvix"
 
-	$UPLOAD $scripts/arch/$platform/run.sh $platform:$basedir
+	$UPLOAD $scripts/arch/$platform/* $platform:$basedir
 }
 
 #
@@ -167,34 +167,66 @@ function download
 }
 
 #
+# Download results.
+#
+function clean_logs
+{
+	platform=$1
+	remotedir=$2
+	localfile=$4
+
+	cecho $GREEN "[+] Cleaning logs"
+
+	ssh $platform "rm -f $remotedir/*-nanvix-cluster-*"
+}
+
+#
 # Run experiment.
 #
-function run
+function compile_and_run
 {
 	platform=$1
 	remotedir=$2
 	srcdir=$3
-	commit=$4
-	img=$5
-	exp=$6
-	it=$7
-	localdir=$8
-	runlog=$9
-	runlogfile=$exp-$runlog-$it
-	lwmpi=${10}
-	map=${11}
+	img=$4
+	it=$5
+	localdir=$6
+	runlog=$7
 
-	cecho $BLUE "[+] Running $runlogfile ($lwmpi, $map)"
-	cecho $BLUE "[+] Running $remotedir - $img"
+	runlogfile=$runlog-$it
 
-	#echo "$ADDONS_ON"
-
-	# checkout $srcdir $commit
-	#switchAddons $srcdir $ADDONS_ON $ADDONS_OFF
-
+	cecho $BLUE "[+] Running $runlogfile ($it)"
+	
 	upload $platform $remotedir $srcdir
-	ssh $platform "cd $remotedir &&
-		$RUN $remotedir img/$img $lwmpi $map &&
+	ssh $platform "cd $remotedir    &&
+		$COMPILE_AND_RUN $remotedir img/$img &&
+		cat $runlog* > $runlogfile &&
+		cat board_0_DDR0_POWER  > profile-ddr0-power-$runlogfile &&
+		cat board_0_DDR1_POWER  > profile-ddr1-power-$runlogfile &&
+		cat board_0_MPPA0_POWER > profile-mppa-power-$runlogfile &&
+		cat board_0_MPPA0_TEMP  > profile-mppa-temp-$runlogfile &&
+		cat board_0_PLX_TEMP    > profile-plx-tmp-$runlogfile"
+	download $platform $remotedir $localdir "$runlogfile"
+}
+
+#
+# Run experiment.
+#
+function just_run
+{
+	platform=$1
+	remotedir=$2
+	srcdir=$3
+	img=$4
+	it=$5
+	localdir=$6
+	runlog=$7
+
+	cecho $BLUE "[+] Running $runlogfile ($it)"
+
+	clean_logs $platform $remotedir "$runlogfile"
+	ssh $platform "cd $remotedir    &&
+		$JUST_RUN $remotedir img/$img &&
 		cat $runlog* > $runlogfile &&
 		cat board_0_DDR0_POWER  > profile-ddr0-power-$runlogfile &&
 		cat board_0_DDR1_POWER  > profile-ddr1-power-$runlogfile &&
@@ -240,33 +272,37 @@ function run_download_result
 	download $platform $remotedir $localdir "$runlogfile"
 }
 
+function parse_outputs
+{
+	platform=$1
+	remotedir=$2
+	srcdir=$3
+	commit=$4
+	img=$5
+	exp=$6
+	it=$7
+	localdir=$8
+	runlog=$9
+	runlogfile=$exp-$runlog-$it
+	lwmpi=${10}
+	map=${11}
+
+	return 0
+}
+
 #===============================================================================
 
-function run_processes
+function run_compile
 {
-	exp=$1
-
-	lwmpi=1
-	map=2
-
-	old_procs_nr="MPI_PROCESSES_NR 192"
-
-	img_dest=mppa256-capbench-$exp.img
-
-	for (( it=0; it<$NITERATIONS; it++ ));
+	local failed='failed|FAILED|Failed'
+	local success='false'
+	while [[ $success == false ]];
 	do
-		for nprocs in {12,24,48,96,192}; # {12,24,48,96,192}
-		do
-			new_procs_nr="MPI_PROCESSES_NR $nprocs"
+		echo "$outdir - $exp - $it" >> executions.log
 
-			replace $DIR_SOURCE "$old_procs_nr" "$new_procs_nr"
-
-			outdir=$OUTDIR-procs-$nprocs
-
-			mkdir -p $outdir
-
-			IMG=$img_dest
-			run               \
+		if [[ $1 -eq 4 ]];
+		then
+			compile_and_run   \
 				$PLATFORM     \
 				$DIR_REMOTE   \
 				$DIR_SOURCE   \
@@ -278,13 +314,43 @@ function run_processes
 				$FILE_RUNLOG  \
 				$lwmpi        \
 				$map
+		else
+			just_run          \
+				$PLATFORM     \
+				$DIR_REMOTE   \
+				$DIR_SOURCE   \
+				$COMMIT       \
+				$IMG          \
+				$exp          \
+				$it           \
+				$outdir       \
+				$FILE_RUNLOG  \
+				$lwmpi        \
+				$map
+		fi
 
-			old_procs_nr="$new_procs_nr"
-		done
+		runlogfile=$outdir/$exp-$FILE_RUNLOG-$it
+
+		while read -r line;
+		do
+			if [[ $line =~ $failed ]];
+			then
+				break
+			fi
+
+			if [[ $line = *"IODDR0@0.0: RM 0: [hal] powering off"* ]];
+			then
+				success='true'
+			fi
+		done < "$runlogfile"
+
+		if [[ $success == true ]];
+		then
+			echo "Succeed !" >> executions.log
+		else
+			echo "Failed !" >> executions.log
+		fi
 	done
-
-	new_procs_nr="MPI_PROCESSES_NR 192"
-	replace $DIR_SOURCE "$old_procs_nr" "$new_procs_nr"
 }
 
 function run_download
@@ -318,78 +384,71 @@ function run_download
 		$map
 }
 
-function run_capbench
+function run_replications
 {
-	# Communication options
-	comm_task_enable="__NANVIX_USE_COMM_WITH_TASKS 1"
-	comm_task_disable="__NANVIX_USE_COMM_WITH_TASKS 0"
+	img=$1
+	exp=$2
+	
+	it=0
+	outdir="$DIR_RESULTS_RAW/$exp"
 
-	# LWMPI options
-	lwmpi_disable="export ADDONS ?="
-	lwmpi_scatter="export ADDONS = -D__NANVIX_USES_LWMPI=1 -D__LWMPI_PROC_MAP=1"
-	lwmpi_compact="export ADDONS = -D__NANVIX_USES_LWMPI=1 -D__LWMPI_PROC_MAP=2"
-
-	# Setup lwmpi
-	replace $DIR_SOURCE "$lwmpi_disable" "$lwmpi_compact"
-
-	for exp in gf; # fn gf 
+	# platform=$1
+	# remotedir=$2
+	# srcdir=$3
+	# img=$4
+	# it=$5
+	# localdir=$6
+	# runlog=$7
+	compile_and_run   \
+		$PLATFORM     \
+		$DIR_REMOTE   \
+		$DIR_SOURCE   \
+		$img          \
+		$it           \
+		$outdir       \
+		$FILE_RUNLOG
+	
+	for i in {1..19}
 	do
-	# Baseline
-		cecho $BLUE "!BASELINE"
-
-		changeRepository baseline
-
-		checkout $DIR_SOURCE $COMMIT
-
-		# Disable comm with tasks
-		replace $DIR_SOURCE "$comm_task_enable" "$comm_task_disable"
-
-		run_processes $exp
-
-		# Enable comm with tasks
-		replace $DIR_SOURCE "$comm_task_disable" "$comm_task_enable"
-
-	# Comm with tasks
-		cecho $BLUE "!COMM"
-
-		changeRepository comm
-
-		checkout $DIR_SOURCE $COMMIT
-
-		#run_processes $exp
-
-	# Daemons with tasks
-		cecho $BLUE "!DAEMONS"
-
-		changeRepository daemons
-
-		checkout $DIR_SOURCE $COMMIT
-
-		#run_processes $exp
+		just_run          \
+			$PLATFORM     \
+			$DIR_REMOTE   \
+			$DIR_SOURCE   \
+			$img          \
+			$i            \
+			$outdir       \
+			$FILE_RUNLOG
 	done
-
-	replace $DIR_SOURCE "$lwmpi_compact" "$lwmpi_disable"
 }
 
-function run_bottleneck
+function run_experiments
 {
-  cecho $BLUE "Bottleneck"
+	nthreads_macro="TESTS_NTHREADS"
+	npages_macro="NPAGES"
 
-  checkout $DIR_SOURCE $COMMIT
+	nthreads_default="$nthreads_macro 0"
+	npages_default="$npages_macro 0"
 
-  run_processes $exp
+	for curr_nthreads in 0 1 2 4 8 16;
+	do
+		replace $DIR_SOURCE "$nthreads_default" "$nthreads_macro $curr_nthreads"
+		for curr_npages in 0 1 2 4 8 16 32;
+		do
+			replace $DIR_SOURCE "$npages_default" "$npages_macro $curr_npages"
+
+			run_replications
+
+			replace $DIR_SOURCE "$npages_macro $curr_npages" "$npages_default"
+
+		done
+		replace $DIR_SOURCE "$nthreads_macro $curr_nthreads" "$nthreads_default"
+	done
+
+	#replace $DIR_SOURCE "$lwmpi_compact" "$lwmpi_default"
 }
 
 #===============================================================================
 
-case $1 in
-	download)
-		changeRepository daemons
-		run_download km
-		;;
-	*)
-		configureRemote $PLATFORM $DIR_SCRIPTS $BASEDIR_REMOTE
-		run_capbench
-		;;
-esac
 
+configureRemote $PLATFORM $DIR_SCRIPTS $BASEDIR_REMOTE
+run_experiments

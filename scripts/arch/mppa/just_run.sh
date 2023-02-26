@@ -3,8 +3,8 @@
 # $3 LWMPI
 # $4 MAP 
 export TARGET=mppa256
-export NANVIX_LWMPI=1
-export LWMPI_PROC_MAP=2
+# export NANVIX_LWMPI=1
+# export LWMPI_PROC_MAP=2
 cd $1                            \
 	&& cp $2 img/mppa256.img     \
-	&& make RELEASE=true test TIMEOUT=5400
+	&& make test TIMEOUT=5400
