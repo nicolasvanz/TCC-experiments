@@ -255,11 +255,11 @@ function run_experiments
 
 		run_replications $img "$exp_prefix-$curr_clusters"
 
-		replace $DIR_SOURCE "$nnodes_macro $curr_clusters" "$nnodes_default"
+		replace $DIR_SOURCE "$nnodes_macro $(($curr_clusters+1))" "$nnodes_default"
 	done
 	replace $DIR_SOURCE "$parallel_activate" "$parallel_deactivate"
-	replace $DIR_SOURCE "$nthreads_default" "$nthreads_macro 16"
-	replace $DIR_SOURCE "$npages_default" "$npages_macro 32"
+	replace $DIR_SOURCE "$nthreads_macro 16" "$nthreads_default"
+	replace $DIR_SOURCE "$npages_macro 32" "$npages_default"
 }
 
 #===============================================================================
