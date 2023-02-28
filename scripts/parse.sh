@@ -128,94 +128,27 @@ function parse_powerlog_services {
 	$SED -i -e "s/mppa-power/power/g" $outfile
 }
 
-: << END
+experiments=(multiple-threads parallel)
+mt_pages=(0 1 2 4 8 16 32)
+mt_threads=(0 1 2 4 8 16)
+p_clusters=(2 4 8 16)
 
-#================================================================================
-
-baseline_hash=$BASELINE_HASH-baseline
-comm_hash=$BASELINE_HASH-comm
-task_hash=$TASK_HASH-task
-
-mkdir -p $DIR_RESULTS_COOKED/capbench/
-
-for exp in fast is lu;
-do
-	echo "parsing $exp ..."
-
-	csvfile=$DIR_RESULTS_COOKED/capbench/$exp.csv
-	powerfile=$DIR_RESULTS_COOKED/capbench/$exp-profile.csv
-	raw_dir=$DIR_RESULTS_RAW
-
-	# Write header.
-	echo "exp;api;nprocs;time" > $csvfile
-	echo "version;component;nprocs;it;time;power" > $powerfile
-
-	for nprocs in {12,24,48,96,192};
-	do
-		for versions in baseline,$baseline_hash comm,$comm_hash daemons,$task_hash;
-		do
-			IFS=","
-			set -- $versions
-
-			version=$1
-			hash=$2
-
-			cat $raw_dir/$hash-procs-$nprocs/$exp-nanvix-cluster-* | \
-				grep "total time"                                  | \
-				sed -E "s/[[:space:]]+/ /g"                        | \
-				cut -d" " -f 9                                     | \
-				sed -E "s/^/$exp;$version;$nprocs;/g"                \
-			>> $csvfile
-
-			parse_powerlog $raw_dir $hash "" $nprocs $exp $powerfile "$version"
-		done
+# Multiple threads
+for mt_page in ${mt_pages[@]}; do
+	for mt_thread in ${mt_threads[@]}; do
+		raw_result_dir=$DIR_RESULTS_RAW/multiple-threads-$mt_thread-$mt_page
+		parsed_result=$DIR_RESULTS_PARSED/multiple-threads-$mt_thread-$mt_page.csv
+		cat $raw_result_dir/$FILE_RUNLOG* | grep "time" | cut -d " " -f 5 > $parsed_result
 	done
 done
 
-baseline_hash=$BASELINE_HASH-baseline
-comm_hash=$BASELINE_HASH-comm
-task_hash=$TASK_HASH-task
-
-mkdir -p $DIR_RESULTS_COOKED/detail
-
-for exp in gf;
-do
-	echo "parsing $exp ..."
-
-	csvfile=$DIR_RESULTS_COOKED/detail/$exp.csv
-	powerfile=$DIR_RESULTS_COOKED/detail/$exp-profile.csv
-	raw_dir=$DIR_RESULTS_RAW
-
-	# Write header.
-	echo "variant;cluster;type;id;cycle;amount" > $csvfile
-
-	for nprocs in {12,24,48,96,192};
-	do
-		for versions in baseline,$baseline_hash;
-		do
-			IFS=","
-			set -- $versions
-
-			variant=$1
-			hash=$2
-
-			cat $raw_dir/$hash-procs-$nprocs/$exp-nanvix-cluster-* | \
-				grep "detail"                                      | \
-				sed -E "s/[[:space:]]+/ /g"                        | \
-				cut -d" " -f 7-                                    | \
-				sed -E "s/[[:space:]]+/;/g"                        | \
-				sed -E "s/^/$variant;$nprocs;/g"                     \
-			>> $csvfile
-		done
-	done
+# Parallel
+for p_cluster in ${p_clusters[@]}; do
+	raw_result_dir=$DIR_RESULTS_RAW/parallel-$p_cluster
+	parsed_result=$DIR_RESULTS_PARSED/parallel-$p_cluster.csv
+	cat $raw_result_dir/$FILE_RUNLOG* | grep "time" | cut -d " " -f 5 > $parsed_result
 done
 
-END
 
-cat results/raw/bottleneck-detail \
-  | grep "bottleneck" \
-  |  sed -E "s/[[:space:]]+/ /g" \
-  |  cut -d" " -f 9 \
-  |  sed -E "s/^/it;tasks;size;unit;total;for/g" \
-  >> results/cooked/bottleneck
+
 
