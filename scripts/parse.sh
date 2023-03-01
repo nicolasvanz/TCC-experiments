@@ -133,20 +133,29 @@ mt_pages=(0 1 2 4 8 16 32)
 mt_threads=(0 1 2 4 8 16)
 p_clusters=(2 4 8 16)
 
+
+parsed_result_dir_mt_thread=$DIR_RESULTS_PARSED/multiple_threads
+parsed_result_dir_mt_parallel=$DIR_RESULTS_PARSED/parallel
+
+mkdir -p $DIR_RESULTS_PARSED
+mkdir -p $parsed_result_dir_mt_thread
+mkdir -p $parsed_result_dir_mt_parallel
 # Multiple threads
 for mt_page in ${mt_pages[@]}; do
 	for mt_thread in ${mt_threads[@]}; do
 		raw_result_dir=$DIR_RESULTS_RAW/multiple-threads-$mt_thread-$mt_page
-		parsed_result=$DIR_RESULTS_PARSED/multiple-threads-$mt_thread-$mt_page.csv
-		cat $raw_result_dir/$FILE_RUNLOG* | grep "time" | cut -d " " -f 5 > $parsed_result
+		parsed_result=$parsed_result_dir_mt_thread/multiple-threads-$mt_thread-$mt_page.csv
+		echo "time" > $parsed_result
+		cat $raw_result_dir/$FILE_RUNLOG* | grep "time" | cut -d " " -f 5 >> $parsed_result
 	done
 done
 
 # Parallel
 for p_cluster in ${p_clusters[@]}; do
 	raw_result_dir=$DIR_RESULTS_RAW/parallel-$p_cluster
-	parsed_result=$DIR_RESULTS_PARSED/parallel-$p_cluster.csv
-	cat $raw_result_dir/$FILE_RUNLOG* | grep "time" | cut -d " " -f 5 > $parsed_result
+	parsed_result=$parsed_result_dir_mt_parallel/parallel-$p_cluster.csv
+	echo "time" > $parsed_result
+	cat $raw_result_dir/$FILE_RUNLOG* | grep "time" | cut -d " " -f 5 >> $parsed_result
 done
 
 

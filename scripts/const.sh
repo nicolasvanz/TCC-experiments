@@ -59,8 +59,14 @@ DIR_RESULTS_RAW="$DIR_RESULTS_EXPSET/raw"
 DIR_RESULTS_PARSED="$DIR_RESULTS_EXPSET/parsed"
 DIR_RESULTS_COOKED="$DIR_RESULTS_EXPSET/cooked"
 DIR_RSCRIPTS="$DIR_CURRENT/rscripts"
+DIR_PYTHONSCRIPTS="$DIR_CURRENT/pythonscripts"
 DIR_SCRIPTS="$DIR_CURRENT/scripts"
+DIR_VENV="$DIR_CURRENT/venv"
 BASEDIR_REMOTE="~/nicolas"
+
+VENV_BIN="$DIR_VENV/bin"
+VENV_PIP="$VENV_BIN/pip3"
+VENV_RUN="$VENV_BIN/python3"
 
 #===============================================================================
 # Files

@@ -26,65 +26,20 @@ DIR_SCRIPT="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" >/dev/null 2>&1 && pwd  )"
 
 source $DIR_SCRIPT/const.sh
 
-function plot() {
-	category=$1
-	script=$2
-	exp=$3
-	power_it=$3
 
-	cecho $BLUE "plotting $exp ..."
+if [ -d "$DIR_VENV" ];
+then
+    cecho $GREEN "[+] Virtual environment already installed. Running plots"
+else
+    cecho $GREEN "[+] Installing virtual environment"
+    python3 -m virtualenv $DIR_VENV
+    $VENV_PIP install -r $DIR_PYTHONSCRIPTS/requirements.txt
+fi
 
-	Rscript --vanilla $DIR_RSCRIPTS/$script.R  \
-		$DIR_RESULTS_COOKED/$category/$exp.csv \
-		$DIR_PLOTS/$category                   \
-		$exp                                   \
-		$power_it
-}
+mkdir -p $DIR_PLOTS
 
-mkdir -p $DIR_PLOTS/capbench
-mkdir -p $DIR_PLOTS/services
-mkdir -p $DIR_PLOTS/microbenchmarks
+cecho $GREEN "[+] Plotting results"
+$VENV_RUN $DIR_PYTHONSCRIPTS/plt_parallel.py $DIR_RESULTS_PARSED/parallel $DIR_PLOTS/parallel.pdf
+$VENV_RUN $DIR_PYTHONSCRIPTS/plt_multiple_threads.py $DIR_RESULTS_PARSED/multiple_threads $DIR_PLOTS/multiple_threads.pdf
 
-# Category
-for args in fn,1 gf,1 km,1;
-do
-	#=======================================================================
-	# Separates parameters: Experiment + Iteration used in the calculation of
-	# energy consumption
-	#=======================================================================
-	IFS=","
-	set -- $args
-
-	exp=$1
-	power_it=$2
-	#=======================================================================
-
-	plot capbench capbench $exp $power_it
-done
-
-# Services
-plot services services services 0
-
-# Services
-plot services sizes sizes 0
-
-# Category
-for args in core-usage,0 syscalls,1 create-wait,1;
-do
-	#=======================================================================
-	# Separates parameters: Experiment + Iteration used in the calculation of
-	# energy consumption
-	#=======================================================================
-	IFS=","
-	set -- $args
-
-	exp=$1
-	power_it=$2
-	#=======================================================================
-
-	plot microbenchmarks $exp $exp $power_it
-done
-
-rm Rplots.pdf
-#mv *.pdf $DIR_PLOTS
 
