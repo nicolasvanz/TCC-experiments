@@ -213,7 +213,7 @@ IODDR0@0.0: RM 1: [user][portal] Initializes portal module
 IODDR0@0.0: RM 1: [user][sync] Initializes sync module
 IODDR0@0.0: RM 1: [user][mailbox] Initializes mailbox module
 IODDR0@0.0: RM 0: cluster 0: --------------------------------------------------------------------------------
-IODDR0@0.0: RM 1: time: 9626607
+IODDR0@0.0: RM 1: time: 9586855
 Cluster1@0.0: PE 0: [hal][core] halting...
 IODDR0@0.0: RM 0: cluster 0: [test][migration][api] migration          [passed]
 Cluster0@0.0: PE 0: [hal][core] halting...

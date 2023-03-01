@@ -135,74 +135,74 @@ Cluster0@0.0: PE 15: [hal] exception stack at 0x000aa000
 Cluster1@0.0: PE 0: [hal][portal] Portal Initialization.
 Cluster0@0.0: PE 0: [hal][sync] Sync Initialization.
 Cluster1@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
+IODDR0@0.0: RM 0: [core 0][hal] initializing tlb
 Cluster0@0.0: PE 0: [hal][mailbox] Mailbox Initialization.
 Cluster1@0.0: PE 0: [kernel][mm] initializing the memory system
-IODDR0@0.0: RM 0: [core 0][hal] initializing tlb
+IODDR0@0.0: RM 0: [hal][core] booting up core...
 Cluster0@0.0: PE 0: [hal][portal] Portal Initialization.
 Cluster1@0.0: PE 0: [kernel][mm] initializing the page frame allocator
-IODDR0@0.0: RM 0: [hal][core] booting up core...
+IODDR0@0.0: RM 0: [hal] exception stack at 0x000a0000
 Cluster0@0.0: PE 0: [hal][core] interrupt handler registered for irq 0
 Cluster1@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
-IODDR0@0.0: RM 0: [hal] exception stack at 0x000a0000
+IODDR0@0.0: RM 0: [hal][core] initializing interrupts...
 Cluster0@0.0: PE 0: [kernel][mm] initializing the memory system
 Cluster1@0.0: PE 0: [kernel][mm] initializing the user page allocator
-IODDR0@0.0: RM 0: [hal][core] initializing interrupts...
+IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 7
 Cluster0@0.0: PE 0: [kernel][mm] initializing the page frame allocator
 Cluster1@0.0: PE 0: [hal][core] exception handler 0x000370b8 registered for tlb fault
-IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 7
+IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 3
 Cluster0@0.0: PE 0: [kernel][mm] initializing the kernel page allocator
 Cluster1@0.0: PE 0: [hal][core] overwriting handler 0x000370b8 for tlb fault
-IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 3
+IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 4
 Cluster0@0.0: PE 0: [kernel][mm] initializing the user page allocator
 Cluster1@0.0: PE 0: [hal][core] exception handler 0x000370b8 registered for tlb fault
-IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 4
+IODDR0@0.0: RM 0: [hal][sync] Sync Initialization.
 Cluster0@0.0: PE 0: [hal][core] exception handler 0x000370b8 registered for tlb fault
 Cluster1@0.0: PE 0: [hal][core] exception handler 0x000371e0 registered for page fault
-IODDR0@0.0: RM 0: [hal][sync] Sync Initialization.
+IODDR0@0.0: RM 0: [hal][mailbox] Mailbox Initialization.
 Cluster0@0.0: PE 0: [hal][core] overwriting handler 0x000370b8 for tlb fault
 Cluster1@0.0: PE 0: [kernel][noc] initializing the noc system
-IODDR0@0.0: RM 0: [hal][mailbox] Mailbox Initialization.
+IODDR0@0.0: RM 0: [hal][portal] Portal Initialization.
 Cluster0@0.0: PE 0: [hal][core] exception handler 0x000370b8 registered for tlb fault
 Cluster1@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
-IODDR0@0.0: RM 0: [hal][portal] Portal Initialization.
+IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 0
 Cluster0@0.0: PE 0: [hal][core] exception handler 0x000371e0 registered for page fault
 Cluster1@0.0: PE 0: [kernel][noc] initializing the kportal facility
-IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 0
-Cluster0@0.0: PE 0: [kernel][noc] initializing the noc system
-Cluster1@0.0: PE 0: [kernel][noc] initializing the ksync facility
 IODDR0@0.0: RM 0: [kernel][mm] initializing the memory system
+IODDR0@0.0: RM 1: [core 1][hal] initializing tlb
 IODDR0@0.0: RM 2: [core 2][hal] initializing tlb
 IODDR0@0.0: RM 3: [core 3][hal] initializing tlb
-Cluster0@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
-Cluster1@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+Cluster0@0.0: PE 0: [kernel][noc] initializing the noc system
+Cluster1@0.0: PE 0: [kernel][noc] initializing the ksync facility
 IODDR0@0.0: RM 0: [kernel][mm] initializing the page frame allocator
-IODDR0@0.0: RM 1: [core 1][hal] initializing tlb
+IODDR0@0.0: RM 1: [hal][core] booting up core...
 IODDR0@0.0: RM 2: [hal][core] booting up core...
 IODDR0@0.0: RM 3: [hal][core] booting up core...
+Cluster0@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
+Cluster1@0.0: PE 0: [kernel][dev] enabling hardware interrupts
+IODDR0@0.0: RM 0: [kernel][mm] initializing the kernel page allocator
+IODDR0@0.0: RM 1: [hal] exception stack at 0x000a1000
+IODDR0@0.0: RM 2: [hal] exception stack at 0x000a2000
+IODDR0@0.0: RM 3: [hal] exception stack at 0x000a3000
 Cluster0@0.0: PE 0: [kernel][noc] initializing the kportal facility
 Cluster1@0.0: PE 0: [kernel][task][dispatcher] Working on core 0!
 Cluster1@0.0: PE 1: [user][noc] initializing the noc system
-IODDR0@0.0: RM 0: [kernel][mm] initializing the kernel page allocator
-IODDR0@0.0: RM 1: [hal][core] booting up core...
-IODDR0@0.0: RM 2: [hal] exception stack at 0x000a2000
-IODDR0@0.0: RM 3: [hal] exception stack at 0x000a3000
+IODDR0@0.0: RM 0: [kernel][mm] initializing the user page allocator
 Cluster0@0.0: PE 0: [kernel][noc] initializing the ksync facility
 Cluster1@0.0: PE 1: [user][portal] Initializes portal module
-IODDR0@0.0: RM 0: [kernel][mm] initializing the user page allocator
-IODDR0@0.0: RM 1: [hal] exception stack at 0x000a1000
+IODDR0@0.0: RM 0: [hal][core] exception handler 0x00040848 registered for tlb fault
 Cluster0@0.0: PE 0: [kernel][dev] enabling hardware interrupts
 Cluster1@0.0: PE 1: [user][sync] Initializes sync module
-IODDR0@0.0: RM 0: [hal][core] exception handler 0x00040848 registered for tlb fault
+IODDR0@0.0: RM 0: [hal][core] overwriting handler 0x00040848 for tlb fault
 Cluster0@0.0: PE 0: [kernel][task][dispatcher] Working on core 0!
 Cluster0@0.0: PE 1: [user][noc] initializing the noc system
 Cluster1@0.0: PE 1: [user][mailbox] Initializes mailbox module
-IODDR0@0.0: RM 0: [hal][core] overwriting handler 0x00040848 for tlb fault
-Cluster0@0.0: PE 1: [user][portal] Initializes portal module
 IODDR0@0.0: RM 0: [hal][core] exception handler 0x00040848 registered for tlb fault
-Cluster0@0.0: PE 1: [user][sync] Initializes sync module
+Cluster0@0.0: PE 1: [user][portal] Initializes portal module
 IODDR0@0.0: RM 0: [hal][core] exception handler 0x00040998 registered for page fault
-Cluster0@0.0: PE 1: [user][mailbox] Initializes mailbox module
+Cluster0@0.0: PE 1: [user][sync] Initializes sync module
 IODDR0@0.0: RM 0: [kernel][noc] initializing the noc system
+Cluster0@0.0: PE 1: [user][mailbox] Initializes mailbox module
 IODDR0@0.0: RM 0: [kernel][noc] initializing the kmailbox facility
 IODDR0@0.0: RM 0: [kernel][noc] initializing the kportal facility
 IODDR0@0.0: RM 0: [kernel][noc] initializing the ksync facility
@@ -214,8 +214,8 @@ IODDR0@0.0: RM 1: [user][sync] Initializes sync module
 IODDR0@0.0: RM 1: [user][mailbox] Initializes mailbox module
 IODDR0@0.0: RM 0: cluster 0: --------------------------------------------------------------------------------
 Cluster1@0.0: PE 0: [hal][core] halting...
-IODDR0@0.0: RM 1: time: 9814316
-Cluster0@0.0: PE 0: [hal][core] halting...
+IODDR0@0.0: RM 1: time: 9848605
 IODDR0@0.0: RM 0: cluster 0: [test][migration][api] migration          [passed]
+Cluster0@0.0: PE 0: [hal][core] halting...
 IODDR0@0.0: RM 0: [hal][processor] powering off...
 IODDR0@0.0: RM 0: [hal] powering off...
