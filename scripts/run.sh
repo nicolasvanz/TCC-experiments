@@ -44,81 +44,6 @@ function replace
 }
 
 #
-# Turns on/off add-ons.
-#
-function switchAddons
-{
-	srcdir=$1
-	on=$2
-	off=$3
-	curdir=$PWD
-
-	cecho $GREEN "[+] Switching Addons"
-
-	cd $srcdir
-
-		replace . $off $on
-
-	cd $curdir
-}
-
-#
-# Change repository.
-#
-function changeRepository
-{
-	mode=$1
-
-	cecho $GREEN "[+] Changing Repository"
-
-	case $mode in
-		baseline)
-			cecho $GREEN "   [+] Configuring baseline mode"
-			COMMIT=$BASELINE_COMMIT
-			HASH=$BASELINE_HASH
-			OUTDIR=$DIR_RESULTS_RAW/$HASH-baseline
-			;;
-
-		comm)
-			cecho $GREEN "   [+] Configuring comm mode"
-			COMMIT=$BASELINE_COMMIT
-			HASH=$BASELINE_HASH
-			OUTDIR=$DIR_RESULTS_RAW/$HASH-comm
-			;;
-
-		daemons)
-			cecho $GREEN "   [+] Configuring daemons mode"
-			COMMIT=$TASK_COMMIT
-			HASH=$TASK_HASH
-			OUTDIR=$DIR_RESULTS_RAW/$HASH-task
-			;;
-
-		*)
-			cecho $RED "unknown mode"
-			exit 1
-	esac
-}
-
-#
-# Checkout source code.
-#
-function checkout
-{
-	srcdir=$1
-	commit=$2
-	curdir=$PWD
-
-	cecho $GREEN "[+] Checkout Repository"
-
-	cd $srcdir
-
-		git checkout $commit
-		git submodule update --recursive
-
-	cd $curdir
-}
-
-#
 # Populate base dir on remote.
 #
 function configureRemote
@@ -162,8 +87,10 @@ function download
 
 	cecho $GREEN "[+] Downloading"
 
+	mkdir -p $localdir
+
 	scp "$platform:$remotedir/$localfile" $localdir/$localfile
-	scp "$platform:$remotedir/profile-*" $localdir
+	# scp "$platform:$remotedir/profile-*" $localdir
 }
 
 #
@@ -177,7 +104,7 @@ function clean_logs
 
 	cecho $GREEN "[+] Cleaning logs"
 
-	ssh $platform "rm -f $remotedir/*-nanvix-cluster-*"
+	ssh $platform "rm -f $remotedir/*nanvix-cluster*"
 }
 
 #
@@ -222,6 +149,7 @@ function just_run
 	localdir=$6
 	runlog=$7
 
+	runlogfile=$runlog-$it
 	cecho $BLUE "[+] Running $runlogfile ($it)"
 
 	clean_logs $platform $remotedir "$runlogfile"
@@ -234,154 +162,6 @@ function just_run
 		cat board_0_MPPA0_TEMP  > profile-mppa-temp-$runlogfile &&
 		cat board_0_PLX_TEMP    > profile-plx-tmp-$runlogfile"
 	download $platform $remotedir $localdir "$runlogfile"
-}
-
-#
-# Run experiment.
-#
-function run_download_result
-{
-	platform=$1
-	remotedir=$2
-	srcdir=$3
-	commit=$4
-	img=$5
-	exp=$6
-	it=$7
-	localdir=$8
-	runlog=$9
-	runlogfile=$exp-$runlog-$it
-	lwmpi=${10}
-	map=${11}
-
-	cecho $BLUE "[+] Running $runlogfile ($lwmpi, $map)"
-
-	#echo "$ADDONS_ON"
-
-	# checkout $srcdir $commit
-	#switchAddons $srcdir $ADDONS_ON $ADDONS_OFF
-
-	#upload $platform $remotedir $srcdir
-	ssh $platform "cd $remotedir    &&
-		cat $runlog* > $runlogfile &&
-		cat board_0_DDR0_POWER  > profile-ddr0-power-$runlogfile &&
-		cat board_0_DDR1_POWER  > profile-ddr1-power-$runlogfile &&
-		cat board_0_MPPA0_POWER > profile-mppa-power-$runlogfile &&
-		cat board_0_MPPA0_TEMP  > profile-mppa-temp-$runlogfile &&
-		cat board_0_PLX_TEMP    > profile-plx-tmp-$runlogfile"
-	download $platform $remotedir $localdir "$runlogfile"
-}
-
-function parse_outputs
-{
-	platform=$1
-	remotedir=$2
-	srcdir=$3
-	commit=$4
-	img=$5
-	exp=$6
-	it=$7
-	localdir=$8
-	runlog=$9
-	runlogfile=$exp-$runlog-$it
-	lwmpi=${10}
-	map=${11}
-
-	return 0
-}
-
-#===============================================================================
-
-function run_compile
-{
-	local failed='failed|FAILED|Failed'
-	local success='false'
-	while [[ $success == false ]];
-	do
-		echo "$outdir - $exp - $it" >> executions.log
-
-		if [[ $1 -eq 4 ]];
-		then
-			compile_and_run   \
-				$PLATFORM     \
-				$DIR_REMOTE   \
-				$DIR_SOURCE   \
-				$COMMIT       \
-				$IMG          \
-				$exp          \
-				$it           \
-				$outdir       \
-				$FILE_RUNLOG  \
-				$lwmpi        \
-				$map
-		else
-			just_run          \
-				$PLATFORM     \
-				$DIR_REMOTE   \
-				$DIR_SOURCE   \
-				$COMMIT       \
-				$IMG          \
-				$exp          \
-				$it           \
-				$outdir       \
-				$FILE_RUNLOG  \
-				$lwmpi        \
-				$map
-		fi
-
-		runlogfile=$outdir/$exp-$FILE_RUNLOG-$it
-
-		while read -r line;
-		do
-			if [[ $line =~ $failed ]];
-			then
-				break
-			fi
-
-			if [[ $line = *"IODDR0@0.0: RM 0: [hal] powering off"* ]];
-			then
-				success='true'
-			fi
-		done < "$runlogfile"
-
-		if [[ $success == true ]];
-		then
-			echo "Succeed !" >> executions.log
-		else
-			echo "Failed !" >> executions.log
-		fi
-	done
-}
-
-function run_download
-{
-	exp=$1
-
-	lwmpi=1
-	map=2
-
-	img_dest=mppa256-capbench-$exp.img
-
-	it=4
-	nprocs=96
-
-	outdir=$OUTDIR-procs-$nprocs
-
-	mkdir -p $outdir
-
-	IMG=$img_dest
-	run_download_result \
-		$PLATFORM     \
-		$DIR_REMOTE   \
-		$DIR_SOURCE   \
-		$COMMIT       \
-		$IMG          \
-		$exp          \
-		$it           \
-		$outdir       \
-		$FILE_RUNLOG  \
-		$lwmpi        \
-		$map
 }
 
 function run_replications
@@ -423,12 +203,27 @@ function run_replications
 
 function run_experiments
 {
-	nthreads_macro="TESTS_NTHREADS"
-	npages_macro="NPAGES"
+	nthreads_macro="#define TESTS_NTHREADS"
+	npages_macro="#define NPAGES"
+	nnodes_macro="#define NR_NODES"
 
 	nthreads_default="$nthreads_macro 0"
 	npages_default="$npages_macro 0"
+	nnodes_default="$nnodes_macro 0"
 
+	parallel_activate="#define TEST_PARALLEL_MIGRATION 1"
+	parallel_deactivate="#define TEST_PARALLEL_MIGRATION 0"
+
+	multiple_threads_activate="#define TEST_MULTIPLE_THREADS 1"
+	multiple_threads_deactivate="#define TEST_MULTIPLE_THREADS 0"
+	
+
+	# Multiple Threads tests
+	img="mppa256-migration-multiple-threads.img"
+	exp_prefix="multiple-threads"
+
+	replace $DIR_SOURCE "$nnodes_default" "$nnodes_macro 3"
+	replace $DIR_SOURCE "$multiple_threads_deactivate" "$multiple_threads_activate"
 	for curr_nthreads in 0 1 2 4 8 16;
 	do
 		replace $DIR_SOURCE "$nthreads_default" "$nthreads_macro $curr_nthreads"
@@ -436,15 +231,35 @@ function run_experiments
 		do
 			replace $DIR_SOURCE "$npages_default" "$npages_macro $curr_npages"
 
-			run_replications
+			run_replications $img "$exp_prefix-$curr_nthreads-$curr_npages"
 
 			replace $DIR_SOURCE "$npages_macro $curr_npages" "$npages_default"
 
 		done
 		replace $DIR_SOURCE "$nthreads_macro $curr_nthreads" "$nthreads_default"
 	done
+	replace $DIR_SOURCE "$nnodes_macro 3" "$nnodes_default"
+	replace $DIR_SOURCE "$multiple_threads_activate" "$multiple_threads_deactivate"
 
-	#replace $DIR_SOURCE "$lwmpi_compact" "$lwmpi_default"
+
+	# Parallel tests
+	imgprefix="mppa256-migration-parallel"
+	exp_prefix="parallel"
+	replace $DIR_SOURCE "$nthreads_default" "$nthreads_macro 16"
+	replace $DIR_SOURCE "$npages_default" "$npages_macro 32"
+	replace $DIR_SOURCE "$parallel_deactivate" "$parallel_activate"
+	for curr_clusters in 2 4 8 16
+	do
+		replace $DIR_SOURCE "$nnodes_default" "$nnodes_macro $(($curr_clusters+1))"
+		img="$imgprefix-$curr_clusters.img"
+
+		run_replications $img "$exp_prefix-$curr_clusters"
+
+		replace $DIR_SOURCE "$nnodes_macro $(($curr_clusters+1))" "$nnodes_default"
+	done
+	replace $DIR_SOURCE "$parallel_activate" "$parallel_deactivate"
+	replace $DIR_SOURCE "$nthreads_macro 16" "$nthreads_default"
+	replace $DIR_SOURCE "$npages_macro 32" "$npages_default"
 }
 
 #===============================================================================
