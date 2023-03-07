@@ -1,4 +1,3 @@
-import argparse
 import os
 import re
 import math
@@ -6,6 +5,8 @@ import copy
 import pandas as pd
 import seaborn as sb
 from matplotlib import pyplot as plt
+
+from argparser import init_parser
 
 
 def customize_and_save_plot(originaldf, col, mapx, mapy, outfilesuffix, ylim=(None, None), col_wrap=None):
@@ -69,22 +70,6 @@ def build_dataframe():
     df = df.sort_values(by=["threads", "pages"])
     return df
 
-def init_parser():
-    global args
-    parser = argparse.ArgumentParser(
-        description="Create plot for multiple threads/pages experiment"
-    )
-    parser.add_argument(
-        "inputdirpath", type=str, help="Path to directory with data"
-    )
-    parser.add_argument(
-        "outputfilepath", type=str, help="Path to output file"
-    )
-    parser.add_argument(
-        "frequency", type=int, help="Processor frequency"
-    )
-    args = parser.parse_args()
-
 if __name__ == "__main__":
-    init_parser()
+    args = init_parser()
     main()
