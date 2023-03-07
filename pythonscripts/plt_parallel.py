@@ -8,7 +8,16 @@ from argparser import init_parser
 
 def main():
     df = build_dataframe()
-    sb.barplot(x="clusters", y="time", data=df, errorbar="sd", errwidth=2)
+    fig = sb.barplot(
+        x="clusters", y="time", data=df, errorbar="sd", errwidth=2,
+        color="black"
+    )
+    fig.set(xlabel="Clusters", ylabel="Time (ms)")
+
+    for label in fig.get_yticklabels():
+        fig.axhline(int(label.get_text()), color="grey", linewidth=0.5, ls="--")
+
+    plt.ylim(0, 120)
     plt.savefig(args.outputfilepath)
 
 def build_dataframe():

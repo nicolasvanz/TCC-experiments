@@ -19,7 +19,7 @@ def customize_and_save_plot(originaldf, col, mapx, mapy, outfilesuffix, ylim=(No
 
     # build facet grid
     facet_gridp = sb.FacetGrid(df, col=col, sharey=False, sharex=False, col_wrap=None)
-    facet_gridp.map(plt.bar, mapx, mapy)
+    facet_gridp.map(plt.bar, mapx, mapy, color="black")
 
     # set custom xticks
     facet_gridp.set(
@@ -31,10 +31,10 @@ def customize_and_save_plot(originaldf, col, mapx, mapy, outfilesuffix, ylim=(No
     for axe in facet_gridp.axes.flat:
         # add y axis grid linesplt.
         for yticklabel in axe.get_yticklabels():
-            axe.axhline(int(yticklabel.get_text()), color="black", linewidth=0.005, ls="--")
+            axe.axhline(int(yticklabel.get_text()), color="grey", linewidth=0.005, ls="--")
 
         axe.set_ylabel("Time (ms)")
-    
+
     # automatically adjust subplots padding
     facet_gridp.fig.tight_layout()
 
