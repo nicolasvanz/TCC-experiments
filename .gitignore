@@ -93,3 +93,4 @@ results/cooked/*
 !results/raw.tar.gz
 
 pythonscripts/venv
+__pycache__
