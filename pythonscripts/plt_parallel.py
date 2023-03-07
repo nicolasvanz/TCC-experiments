@@ -20,6 +20,7 @@ def build_dataframe():
             clusters = list(map(int, re.split('_|-|\.', filename)[1:2]))[0]
             df = pd.read_csv(filepath)
             mean = df["time"].mean()
+            mean = mean / args.frequency * 1000 #milliseconds
             df_lines.append([clusters, mean])
     df = pd.DataFrame(df_lines, columns=["clusters", "time"])
     df = df.sort_values(by=["clusters"])
@@ -35,6 +36,9 @@ def init_parser():
     )
     parser.add_argument(
         "outputfilepath", type=str, help="Path to output file"
+    )
+    parser.add_argument(
+        "frequency", type=int, help="Processor frequency"
     )
     args = parser.parse_args()
 
