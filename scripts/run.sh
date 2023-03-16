@@ -224,7 +224,7 @@ function run_experiments
 
 	replace $DIR_SOURCE "$nnodes_default" "$nnodes_macro 3"
 	replace $DIR_SOURCE "$multiple_threads_deactivate" "$multiple_threads_activate"
-	for curr_nthreads in 0 1 2 4 8 16;
+	for curr_nthreads in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16;
 	do
 		replace $DIR_SOURCE "$nthreads_default" "$nthreads_macro $curr_nthreads"
 		for curr_npages in 0 1 2 4 8 16 32;
