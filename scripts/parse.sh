@@ -130,7 +130,7 @@ function parse_powerlog_services {
 
 experiments=(multiple-threads parallel)
 mt_pages=(0 1 2 4 8 16 32)
-mt_threads=(0 1 2 4 8 16)
+mt_threads=(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16)
 p_clusters=(2 4 8 16)
 
 
