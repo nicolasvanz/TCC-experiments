@@ -1,6 +1,6 @@
 Unable to open default board_mgmt interface (err: HW Interface error)
-Cluster0@0.0: PE 0: [hal] booting up cluster...
 Cluster1@0.0: PE 0: [hal] booting up cluster...
+Cluster0@0.0: PE 0: [hal] booting up cluster...
 Cluster0@0.0: PE 0: [hal][cluster] initializing memory layout...
 Cluster1@0.0: PE 0: [hal][cluster] initializing memory layout...
 Cluster0@0.0: PE 0: [hal][cluster] text = 359 KB data = 21 KB bss = 325 KB
@@ -11,15 +11,15 @@ Cluster0@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x0
 Cluster1@0.0: PE 0: [hal][cluster] hyper_high_base=0x001f8000 hyper_high_end=0x00200000
 Cluster0@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f8000
 Cluster1@0.0: PE 0: [hal][cluster] kernel_base=0x00008000 kernel_end=0x000f8000
+IODDR0@0.0: RM 0: [hal] booting up cluster...
 Cluster0@0.0: PE 0: [hal][cluster] kpool_base=0x000f8000 kpool_end=0x00120000
 Cluster1@0.0: PE 0: [hal][cluster] kpool_base=0x000f8000 kpool_end=0x00120000
-IODDR0@0.0: RM 0: [hal] booting up cluster...
+IODDR0@0.0: RM 0: [hal][cluster] initializing memory layout...
 Cluster0@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
 Cluster1@0.0: PE 0: [hal][cluster] user_base=0x80000000   user_end=0xf0000000
-IODDR0@0.0: RM 0: [hal][cluster] initializing memory layout...
+IODDR0@0.0: RM 0: [hal][cluster] text = 975 KB data = 19 KB bss = 422 KB
 Cluster0@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=960 KB kpool=160 KB umem=512 KB
 Cluster1@0.0: PE 0: [hal][cluster] memsize=2 MB kmem=960 KB kpool=160 KB umem=512 KB
-IODDR0@0.0: RM 0: [hal][cluster] text = 975 KB data = 19 KB bss = 422 KB
 IODDR0@0.0: RM 0: [hal][cluster] hyper_low_base=0x00000000 hyper_low_end=0x00010000
 IODDR0@0.0: RM 0: [hal][cluster] hyper_high_base=0x001f0000 hyper_high_end=0x00200000
 IODDR0@0.0: RM 0: [hal][cluster] kernel_base=0x00010000 kernel_end=0x00130000
@@ -169,25 +169,25 @@ IODDR0@0.0: RM 0: [hal][core] interrupt handler registered for irq 0
 Cluster1@0.0: PE 0: [hal][core] exception handler 0x000371e0 registered for page fault
 Cluster0@0.0: PE 0: [kernel][noc] initializing the kportal facility
 IODDR0@0.0: RM 0: [kernel][mm] initializing the memory system
-IODDR0@0.0: RM 2: [core 2][hal] initializing tlb
 IODDR0@0.0: RM 3: [core 3][hal] initializing tlb
 Cluster1@0.0: PE 0: [kernel][noc] initializing the noc system
 Cluster0@0.0: PE 0: [kernel][noc] initializing the ksync facility
 IODDR0@0.0: RM 0: [kernel][mm] initializing the page frame allocator
 IODDR0@0.0: RM 1: [core 1][hal] initializing tlb
-IODDR0@0.0: RM 2: [hal][core] booting up core...
+IODDR0@0.0: RM 2: [core 2][hal] initializing tlb
 IODDR0@0.0: RM 3: [hal][core] booting up core...
 Cluster1@0.0: PE 0: [kernel][noc] initializing the kmailbox facility
 Cluster0@0.0: PE 0: [kernel][dev] enabling hardware interrupts
 IODDR0@0.0: RM 0: [kernel][mm] initializing the kernel page allocator
 IODDR0@0.0: RM 1: [hal][core] booting up core...
-IODDR0@0.0: RM 2: [hal] exception stack at 0x000a2000
+IODDR0@0.0: RM 2: [hal][core] booting up core...
 IODDR0@0.0: RM 3: [hal] exception stack at 0x000a3000
 Cluster1@0.0: PE 0: [kernel][noc] initializing the kportal facility
 Cluster0@0.0: PE 0: [kernel][task][dispatcher] Working on core 0!
 Cluster0@0.0: PE 1: [user][noc] initializing the noc system
 IODDR0@0.0: RM 0: [kernel][mm] initializing the user page allocator
 IODDR0@0.0: RM 1: [hal] exception stack at 0x000a1000
+IODDR0@0.0: RM 2: [hal] exception stack at 0x000a2000
 Cluster1@0.0: PE 0: [kernel][noc] initializing the ksync facility
 Cluster0@0.0: PE 1: [user][portal] Initializes portal module
 IODDR0@0.0: RM 0: [hal][core] exception handler 0x00040848 registered for tlb fault
@@ -213,9 +213,9 @@ IODDR0@0.0: RM 1: [user][portal] Initializes portal module
 IODDR0@0.0: RM 1: [user][sync] Initializes sync module
 IODDR0@0.0: RM 1: [user][mailbox] Initializes mailbox module
 IODDR0@0.0: RM 0: cluster 0: --------------------------------------------------------------------------------
-Cluster1@0.0: PE 0: [hal][core] halting...
-IODDR0@0.0: RM 1: time: 34577788
-Cluster0@0.0: PE 0: [hal][core] halting...
+IODDR0@0.0: RM 1: time: 34490372
 IODDR0@0.0: RM 0: cluster 0: [test][migration][api] migration          [passed]
+Cluster0@0.0: PE 0: [hal][core] halting...
+Cluster1@0.0: PE 0: [hal][core] halting...
 IODDR0@0.0: RM 0: [hal][processor] powering off...
 IODDR0@0.0: RM 0: [hal] powering off...
