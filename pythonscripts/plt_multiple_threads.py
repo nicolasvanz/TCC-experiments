@@ -26,7 +26,7 @@ def customize_and_save_plot(
     xtickslabels= sorted(list(set(originaldf[mapx].to_list())))
 
     # build facet grid
-    facet_grid = sb.FacetGrid(df, col=col, sharey=False, sharex=False, col_wrap=col_wrap, aspect=aspect)
+    facet_grid = sb.FacetGrid(df, col=col, sharey=False, sharex=False, col_wrap=col_wrap, aspect=aspect,)
     facet_grid.map(sb.barplot, mapx, mapy, color="black", order=xticks)
 
     # xticks - 1 because seaborn starts xticks from 0 and our data starts from 1 
@@ -53,12 +53,15 @@ def customize_and_save_plot(
         for yticklabel in axe.get_yticklabels():
             axe.axhline(int(yticklabel.get_text()), color="grey", linewidth=0.005, ls="--")
         
-        # set y axis label for each subplot (note: labels only appear in each
-        # subplot if the sharey parameter is set to False)
+        # set axis label for each subplot (note: labels only appear in each
+        # subplot if the sharey/sharex parameter is set to False)
         # axe.set_ylabel("Time (ms)")
+        # axe.set_xlabel(mapx)
 
     # automatically adjust subplots padding
     facet_grid.fig.tight_layout()
+    # plt.tight_layout()
+
 
     plt.savefig(outputfilepath_name + outfilesuffix + outputfilepath_ext)
 
@@ -78,7 +81,7 @@ def main():
     customize_and_save_plot(
         df, "threads", "páginas", "milissegundos", "_threads",
         ylim = (0, 120),
-        col_wrap=4,
+        col_wrap=5,
         xlogarithmic=True,
     )
 
