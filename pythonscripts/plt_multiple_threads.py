@@ -65,14 +65,7 @@ def customize_and_save_plot(
 def main():
     df = build_dataframe()
 
-    #rename parameters and columns
     df["threads"]=df["threads"].apply(lambda x : x + 1)
-    # new_columns_names = {
-    #     "time":"milissegundos",
-    #     "pages":"páginas",
-    #     "threads":"threads"
-    # }
-    # df = df.rename(columns=new_columns_names)
 
     customize_and_save_plot(
         df, "páginas", "threads", "milissegundos", "_pages",
