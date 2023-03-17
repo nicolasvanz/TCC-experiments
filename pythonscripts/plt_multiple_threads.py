@@ -9,7 +9,10 @@ from matplotlib import pyplot as plt
 from argparser import init_parser
 
 
-def customize_and_save_plot(originaldf, col, mapx, mapy, outfilesuffix, ylim=(None, None), col_wrap=None, xlogarithmic=False, xonlyeven=False):
+def customize_and_save_plot(
+        originaldf, col, mapx, mapy, outfilesuffix, ylim=(None, None),
+        col_wrap=None, xlogarithmic=False, aspect=1, adjust_tick_fn=None
+):
     df = originaldf.copy()
 
     outputfilepath_name, outputfilepath_ext = os.path.splitext(args.outputfilepath)
@@ -18,28 +21,17 @@ def customize_and_save_plot(originaldf, col, mapx, mapy, outfilesuffix, ylim=(No
         # add logarithmic scale for mapx for uniform spacing in x axis
         df[mapx] = df[mapx].apply(lambda x : math.log2(x) + 1 if x != 0 else x)
 
-    # build facet grid
-    facet_grid = sb.FacetGrid(df, col=col, sharey=False, sharex=False, col_wrap=col_wrap, aspect=1)
-    facet_grid.map(sb.barplot, mapx, mapy, color="black", width=1, dodge=False)
-    
-    # for axe in facet_grid.axes.flat:
-    #     axe.relim()
-    #     axe.autoscale_view()
-    #     axe.margins(y=0.1)
-
-    for axe in facet_grid.axes.flat:
-        for patch in axe.patches:
-            current_width = patch.get_width()
-            diff = current_width - 0.8
-            patch.set_width(0.8)
-            patch.set_x(patch.get_x() + diff * .5)
-
-    # set custom xticks
+    # custom xticks
     xticks = sorted(list(set(df[mapx].to_list())))
     xtickslabels= sorted(list(set(originaldf[mapx].to_list())))
-    if xonlyeven:
-        xticks = list(filter(lambda x: x%2 == 0, xticks))
-        xtickslabels = list(filter(lambda x: x%2 == 0, xtickslabels))
+
+    # build facet grid
+    facet_grid = sb.FacetGrid(df, col=col, sharey=False, sharex=False, col_wrap=col_wrap, aspect=aspect)
+    facet_grid.map(sb.barplot, mapx, mapy, color="black", order=xticks)
+
+    # xticks - 1 because seaborn starts xticks from 0 and our data starts from 1 
+    if adjust_tick_fn:
+        xticks = list(map(lambda x: x-1, xticks))
 
     facet_grid.set(
         xticks=xticks,
@@ -47,17 +39,22 @@ def customize_and_save_plot(originaldf, col, mapx, mapy, outfilesuffix, ylim=(No
         ylim=ylim,
     )
 
+    # write value on top of each bar
     for ax in facet_grid.axes:
-	    for p in ax.patches:
-             ax.annotate("%d" % p.get_height(), (p.get_x() + p.get_width() / 2., p.get_height()),
-                 ha='center', va='center', fontsize=8, color='black', xytext=(0, 5),
-                 textcoords='offset points')
+        for p in ax.patches:
+            ax.annotate(
+                "%d" % p.get_height(), (p.get_x() + p.get_width() / 2.,
+                p.get_height()), ha='center', va='center', fontsize=9,
+                color='black', xytext=(0, 5), textcoords='offset points',
+            )
 
     for axe in facet_grid.axes.flat:
         # add y axis grid linesplt.
         for yticklabel in axe.get_yticklabels():
             axe.axhline(int(yticklabel.get_text()), color="grey", linewidth=0.005, ls="--")
-
+        
+        # set y axis label for each subplot (note: labels only appear in each
+        # subplot if the sharey parameter is set to False)
         # axe.set_ylabel("Time (ms)")
 
     # automatically adjust subplots padding
@@ -69,25 +66,27 @@ def main():
     df = build_dataframe()
 
     #rename parameters and columns
-    new_columns_names = {
-        "time":"milissegundos",
-        "pages":"páginas",
-        "threads":"threads"
-    }
-    df = df.rename(columns=new_columns_names)
+    df["threads"]=df["threads"].apply(lambda x : x + 1)
+    # new_columns_names = {
+    #     "time":"milissegundos",
+    #     "pages":"páginas",
+    #     "threads":"threads"
+    # }
+    # df = df.rename(columns=new_columns_names)
 
     customize_and_save_plot(
         df, "páginas", "threads", "milissegundos", "_pages",
         ylim=(0, 120),
-        col_wrap=3,
-        xonlyeven=True
+        col_wrap=4,
+        aspect=1.5,
+        adjust_tick_fn=lambda x:x-1,
     )
 
     customize_and_save_plot(
         df, "threads", "páginas", "milissegundos", "_threads",
         ylim = (0, 120),
-        col_wrap=3,
-        xlogarithmic=True
+        col_wrap=4,
+        xlogarithmic=True,
     )
 
 def build_dataframe():
@@ -101,8 +100,8 @@ def build_dataframe():
             mean = df["time"].mean()
             mean = mean / args.frequency * 1000 #milliseconds
             df_lines.append([threads, pages, mean])
-    df = pd.DataFrame(df_lines, columns=["threads", "pages", "time"])
-    df = df.sort_values(by=["threads", "pages"])
+    df = pd.DataFrame(df_lines, columns=["threads", "páginas", "milissegundos"])
+    df = df.sort_values(by=["threads", "páginas"])
     return df
 
 if __name__ == "__main__":
