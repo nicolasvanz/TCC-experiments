@@ -68,7 +68,11 @@ def customize_and_save_plot(
 def main():
     df = build_dataframe()
 
+    # add 1 to threads because we want to start from 1 and not 0
     df["threads"]=df["threads"].apply(lambda x : x + 1)
+
+    # filtering out threads that are not powers of 2
+    df = df[df["threads"].isin([2**i for i in range(5)])]
 
     customize_and_save_plot(
         df, "páginas", "threads", "milissegundos", "_pages",
@@ -76,12 +80,13 @@ def main():
         col_wrap=4,
         aspect=1.5,
         adjust_tick_fn=lambda x:x-1,
+        xlogarithmic=True,
     )
 
     customize_and_save_plot(
         df, "threads", "páginas", "milissegundos", "_threads",
         ylim = (0, 120),
-        col_wrap=5,
+        col_wrap=6,
         xlogarithmic=True,
     )
 
