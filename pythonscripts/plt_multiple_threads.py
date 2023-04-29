@@ -78,7 +78,7 @@ def main():
         df, "páginas", "threads", "milissegundos", "_pages",
         ylim=(0, 120),
         col_wrap=4,
-        aspect=1.5,
+        # aspect=1.5,
         adjust_tick_fn=lambda x:x-1,
         xlogarithmic=True,
     )
@@ -86,7 +86,7 @@ def main():
     customize_and_save_plot(
         df, "threads", "páginas", "milissegundos", "_threads",
         ylim = (0, 120),
-        col_wrap=6,
+        col_wrap=5,
         xlogarithmic=True,
     )
 
