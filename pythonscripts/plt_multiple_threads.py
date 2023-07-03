@@ -5,6 +5,7 @@ import copy
 import pandas as pd
 import seaborn as sb
 from matplotlib import pyplot as plt
+import scipy.stats as st
 
 from argparser import init_parser
 
@@ -86,7 +87,7 @@ def main():
     customize_and_save_plot(
         df, "threads", "páginas", "milissegundos", "_threads",
         ylim = (0, 120),
-        col_wrap=5,
+        col_wrap=4,
         xlogarithmic=True,
     )
 
@@ -99,6 +100,16 @@ def build_dataframe():
             threads, pages = map(int, re.split('_|-|\.', filename)[2:4])
             df = pd.read_csv(filepath)
             mean = df["time"].mean()
+            print(f"\n{filename} statistics: 95% confidence interval and std")
+            # 95% confidence interval
+            print(list(map(lambda x: x/args.frequency * 1000, st.t.interval(
+                confidence=0.95,
+                df=len(df["time"])-1,
+                loc=mean,
+                scale=st.sem(df["time"])
+            ))))
+            # std
+            print(df["time"].std()/args.frequency*1000)
             mean = mean / args.frequency * 1000 #milliseconds
             df_lines.append([threads, pages, mean])
     df = pd.DataFrame(df_lines, columns=["threads", "páginas", "milissegundos"])

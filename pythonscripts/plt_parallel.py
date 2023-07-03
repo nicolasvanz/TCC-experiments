@@ -2,6 +2,7 @@ import os
 import re
 import pandas as pd
 import seaborn as sb
+import scipy.stats as st
 from matplotlib import pyplot as plt
 
 from argparser import init_parser
@@ -37,6 +38,16 @@ def build_dataframe():
             clusters = list(map(int, re.split('_|-|\.', filename)[1:2]))[0]
             df = pd.read_csv(filepath)
             mean = df["time"].mean()
+            print(f"\n{filename} statistics: 95% confidence interval and std")
+            # 95% confidence interval
+            print(list(map(lambda x: x/args.frequency * 1000, st.t.interval(
+                confidence=0.95,
+                df=len(df["time"])-1,
+                loc=mean,
+                scale=st.sem(df["time"])
+            ))))
+            # std
+            print(df["time"].std()/args.frequency*1000)
             mean = mean / args.frequency * 1000 #milliseconds
             df_lines.append([clusters, mean])
     df = pd.DataFrame(df_lines, columns=["clusters", "time"])
