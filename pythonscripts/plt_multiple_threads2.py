@@ -14,8 +14,7 @@ PRINT_INFO=False
 
 
 def customize_and_save_plot(
-        originaldf, col, mapx, mapy, outfilesuffix, ylim=(None, None),
-        col_wrap=None, xlogarithmic=False, aspect=1, adjust_tick_fn=None
+        originaldf, hue, mapx, mapy, outfilesuffix, xlogarithmic=False
 ):
     df = originaldf.copy()
 
@@ -30,7 +29,7 @@ def customize_and_save_plot(
 
     plt.figure(figsize=(18,6.5))
     barplot = sb.barplot(
-        x="threads", y="milissegundos", hue="páginas", data=df, color="black",
+        x=mapx, y=mapy, hue=hue, data=df, color="black",
         linewidth=1, edgecolor="black"
     )
     barplot.set(xlabel="Threads", ylabel="Milissegundos")
@@ -60,10 +59,7 @@ def main():
     df = df[df["threads"].isin([2**i for i in range(5)])]
 
     customize_and_save_plot(
-        df, "threads", "páginas", "milissegundos", "_threads2",
-        ylim = (0, 120),
-        col_wrap=4,
-        aspect=1.5,
+        df, "páginas", "threads", "milissegundos", "_threads2",
         xlogarithmic=False,
     )
 
