@@ -10,6 +10,8 @@ import scipy.stats as st
 from argparser import init_parser
 
 
+PRINT_INFO=False
+
 def customize_and_save_plot(
         originaldf, col, mapx, mapy, outfilesuffix, ylim=(None, None),
         col_wrap=None, xlogarithmic=False, aspect=1, adjust_tick_fn=None
@@ -100,16 +102,17 @@ def build_dataframe():
             threads, pages = map(int, re.split('_|-|\.', filename)[2:4])
             df = pd.read_csv(filepath)
             mean = df["time"].mean()
-            print(f"\n{filename} statistics: 95% confidence interval and std")
-            # 95% confidence interval
-            print(list(map(lambda x: x/args.frequency * 1000, st.t.interval(
-                confidence=0.95,
-                df=len(df["time"])-1,
-                loc=mean,
-                scale=st.sem(df["time"])
-            ))))
-            # std
-            print(df["time"].std()/args.frequency*1000)
+            if (PRINT_INFO):
+                print(f"\n{filename} statistics: 95% confidence interval and std")
+                # 95% confidence interval
+                print(list(map(lambda x: x/args.frequency * 1000, st.t.interval(
+                    confidence=0.95,
+                    df=len(df["time"])-1,
+                    loc=mean,
+                    scale=st.sem(df["time"])
+                ))))
+                # std
+                print(df["time"].std()/args.frequency*1000)
             mean = mean / args.frequency * 1000 #milliseconds
             df_lines.append([threads, pages, mean])
     df = pd.DataFrame(df_lines, columns=["threads", "páginas", "milissegundos"])
