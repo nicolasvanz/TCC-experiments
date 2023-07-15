@@ -42,6 +42,7 @@ mppa_freq=$((400*10**6))
 
 cecho $GREEN "[+] Plotting results"
 $VENV_RUN $DIR_PYTHONSCRIPTS/plt_parallel.py $DIR_RESULTS_PARSED/parallel $DIR_PLOTS/parallel.pdf $mppa_freq
-$VENV_RUN $DIR_PYTHONSCRIPTS/plt_multiple_threads.py $DIR_RESULTS_PARSED/multiple_threads $DIR_PLOTS/multiple_threads.pdf $mppa_freq
+# $VENV_RUN $DIR_PYTHONSCRIPTS/plt_multiple_threads.py $DIR_RESULTS_PARSED/multiple_threads $DIR_PLOTS/multiple_threads.pdf $mppa_freq
+$VENV_RUN $DIR_PYTHONSCRIPTS/plt_multiple_threads2.py $DIR_RESULTS_PARSED/multiple_threads $DIR_PLOTS/multiple_threads.pdf $mppa_freq
 
 
