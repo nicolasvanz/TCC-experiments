@@ -32,7 +32,7 @@ def customize_and_save_plot(
         x=mapx, y=mapy, hue=hue, data=df, color="black",
         linewidth=1, edgecolor="black"
     )
-    barplot.set(xlabel="Threads", ylabel="Milissegundos")
+    barplot.set(xlabel="Threads", ylabel="Tempo (ms)")
 
     for g in barplot.patches:
         barplot.annotate(
