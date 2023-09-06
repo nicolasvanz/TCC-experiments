@@ -29,14 +29,14 @@ def customize_and_save_plot(
     plt.figure(figsize=(18,6.5))
     barplot = sb.barplot(
         x=mapx, y=mapy, hue=hue, data=df, color="black",
-        linewidth=1, edgecolor="black"
+        linewidth=1, edgecolor="black", errorbar=("ci", 95), errcolor="red"
     )
     barplot.set(xlabel="Threads", ylabel="Tempo (ms)")
 
     for g in barplot.patches:
         barplot.annotate(
             "%d" % g.get_height(),
-            (g.get_x() + g.get_width() / 2., g.get_height()),
+            (g.get_x() + g.get_width() / 2., g.get_height() + 2),
             ha = 'center', va = 'center',
             xytext = (0, 9),
             textcoords = 'offset points',
@@ -53,6 +53,7 @@ def main():
 
     # add 1 to threads because we want to start from 1 and not 0
     df["threads"]=df["threads"].apply(lambda x : x + 1)
+    df["milissegundos"]=df["milissegundos"].apply(lambda x : x/args.frequency*1000)
 
     # filtering out threads that are not powers of 2
     df = df[df["threads"].isin([2**i for i in range(5)])]
@@ -62,7 +63,7 @@ def main():
         xlogarithmic=False,
     )
 
-def build_dataframe():
+def build_dataframe2():
     path = args.inputdirpath
     df_lines = []
     info_stds = []
@@ -101,6 +102,26 @@ def build_dataframe():
     df = pd.DataFrame(df_lines, columns=["threads", "páginas", "milissegundos"])
     df = df.sort_values(by=["threads", "páginas"])
     return df
+
+def build_dataframe():
+    path = args.inputdirpath
+    df_result = pd.DataFrame()
+    for filename in os.listdir(path):
+        filepath = os.path.join(path, filename)
+        if os.path.isfile(filepath):
+            threads, pages = map(int, re.split('_|-|\.', filename)[2:4])
+            df = pd.read_csv(filepath)
+            df.rename(columns={"time": "milissegundos"}, inplace=True)
+            df["threads"] = threads
+            df["páginas"] = pages
+            mean = df["milissegundos"].mean()
+            mean = mean / args.frequency * 1000 #milliseconds
+            df_result = pd.concat([df, df_result])
+
+    print(df_result)
+    # df = pd.DataFrame(df_lines, columns=["threads", "páginas", "milissegundos"])
+    df_result = df_result.sort_values(by=["threads", "páginas"])
+    return df_result
 
 if __name__ == "__main__":
     args = init_parser()
