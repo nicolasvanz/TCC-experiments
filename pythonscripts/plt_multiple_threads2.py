@@ -1,7 +1,6 @@
 import os
 import re
 import math
-import copy
 import pandas as pd
 import seaborn as sb
 from matplotlib import pyplot as plt
@@ -66,6 +65,8 @@ def main():
 def build_dataframe():
     path = args.inputdirpath
     df_lines = []
+    info_stds = []
+    info_confidence_intervals = []
     for filename in os.listdir(path):
         filepath = os.path.join(path, filename)
         if os.path.isfile(filepath):
@@ -75,16 +76,28 @@ def build_dataframe():
             if (PRINT_INFO):
                 print(f"\n{filename} statistics: 95% confidence interval and std")
                 # 95% confidence interval
-                print(list(map(lambda x: x/args.frequency * 1000, st.t.interval(
+                confidence_interval = list(map(lambda x: x/args.frequency * 1000, st.t.interval(
                     confidence=0.95,
                     df=len(df["time"])-1,
                     loc=mean,
                     scale=st.sem(df["time"])
-                ))))
+                )))
+                info_confidence_intervals.append(confidence_interval)
+                print(confidence_interval)
                 # std
-                print(df["time"].std()/args.frequency*1000)
+                std = df["time"].std()/args.frequency*1000
+                info_stds.append(std)
+                print(std)
             mean = mean / args.frequency * 1000 #milliseconds
             df_lines.append([threads, pages, mean])
+    if (PRINT_INFO):
+        stds_as_string = "\n".join(map(lambda x: "%f" % (x), sorted(info_stds)))
+        print(f"\nMultiple Threads Sorted Stds:\n{stds_as_string}")
+
+        info_confidence_intervals.sort(key = lambda x: x[1] - x[0])
+        confidence_intervals_as_string = "\n".join(map(lambda x: "[%f - %f]" % (x[0], x[1]), info_confidence_intervals))
+        print(f"\nMultiple Threads Sorted confidence intervals:\n{confidence_intervals_as_string}")
+
     df = pd.DataFrame(df_lines, columns=["threads", "páginas", "milissegundos"])
     df = df.sort_values(by=["threads", "páginas"])
     return df
