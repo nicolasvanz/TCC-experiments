@@ -8,10 +8,6 @@ import scipy.stats as st
 
 from argparser import init_parser
 
-
-PRINT_INFO=False
-
-
 def customize_and_save_plot(
         originaldf, hue, mapx, mapy, outfilesuffix, xlogarithmic=False
 ):
@@ -28,8 +24,8 @@ def customize_and_save_plot(
 
     plt.figure(figsize=(18,6.5))
     barplot = sb.barplot(
-        x=mapx, y=mapy, hue=hue, data=df, color="black",
-        linewidth=1, edgecolor="black", errorbar=("ci", 95), errcolor="red"
+        x=mapx, y=mapy, hue=hue, data=df, color=(.3,.3,.3),
+        linewidth=1, edgecolor=(.3,.3,.3), errorbar=("ci", 95), errcolor="black"
     )
     barplot.set(xlabel="Threads", ylabel="Tempo (ms)")
 
@@ -63,46 +59,6 @@ def main():
         xlogarithmic=False,
     )
 
-def build_dataframe2():
-    path = args.inputdirpath
-    df_lines = []
-    info_stds = []
-    info_confidence_intervals = []
-    for filename in os.listdir(path):
-        filepath = os.path.join(path, filename)
-        if os.path.isfile(filepath):
-            threads, pages = map(int, re.split('_|-|\.', filename)[2:4])
-            df = pd.read_csv(filepath)
-            mean = df["time"].mean()
-            if (PRINT_INFO):
-                print(f"\n{filename} statistics: 95% confidence interval and std")
-                # 95% confidence interval
-                confidence_interval = list(map(lambda x: x/args.frequency * 1000, st.t.interval(
-                    confidence=0.95,
-                    df=len(df["time"])-1,
-                    loc=mean,
-                    scale=st.sem(df["time"])
-                )))
-                info_confidence_intervals.append(confidence_interval)
-                print(confidence_interval)
-                # std
-                std = df["time"].std()/args.frequency*1000
-                info_stds.append(std)
-                print(std)
-            mean = mean / args.frequency * 1000 #milliseconds
-            df_lines.append([threads, pages, mean])
-    if (PRINT_INFO):
-        stds_as_string = "\n".join(map(lambda x: "%f" % (x), sorted(info_stds)))
-        print(f"\nMultiple Threads Sorted Stds:\n{stds_as_string}")
-
-        info_confidence_intervals.sort(key = lambda x: x[1] - x[0])
-        confidence_intervals_as_string = "\n".join(map(lambda x: "[%f - %f]" % (x[0], x[1]), info_confidence_intervals))
-        print(f"\nMultiple Threads Sorted confidence intervals:\n{confidence_intervals_as_string}")
-
-    df = pd.DataFrame(df_lines, columns=["threads", "páginas", "milissegundos"])
-    df = df.sort_values(by=["threads", "páginas"])
-    return df
-
 def build_dataframe():
     path = args.inputdirpath
     df_result = pd.DataFrame()
@@ -118,8 +74,6 @@ def build_dataframe():
             mean = mean / args.frequency * 1000 #milliseconds
             df_result = pd.concat([df, df_result])
 
-    print(df_result)
-    # df = pd.DataFrame(df_lines, columns=["threads", "páginas", "milissegundos"])
     df_result = df_result.sort_values(by=["threads", "páginas"])
     return df_result
 
